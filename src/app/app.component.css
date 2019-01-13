@@ -18,7 +18,7 @@ a:active {
 
 .navigation-items {
     list-style: none;
-    padding: 0;
+    padding: 05px;
     margin: 0;
     cursor: pointer;
 }
@@ -30,12 +30,12 @@ a:active {
     padding-right: 5px;
     text-align: center;
     vertical-align: middle;
-    width: 15%;
+
 }
 
 .label {
     display: inline-block;
     line-height: 30px;
     margin: 0;
-    width: 85%;
+
 }

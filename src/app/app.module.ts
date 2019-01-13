@@ -13,13 +13,7 @@ import { environment } from '../environments/environment';
 import { AppEffects } from './app.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-import {
-  MatSidenavModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatListModule,
-} from '@angular/material';
+import { MaterialModule} from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -32,10 +26,7 @@ import {
     EffectsModule.forRoot([AppEffects]),
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
+      MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
