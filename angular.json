@@ -8,7 +8,11 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        "@ngrx/schematics:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -131,5 +135,8 @@
       }
     }
   },
-  "defaultProject": "Ngrx"
+  "defaultProject": "Ngrx",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
