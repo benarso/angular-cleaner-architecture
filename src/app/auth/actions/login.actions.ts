@@ -1,11 +1,18 @@
 import { Action } from '@ngrx/store';
 
 export enum LoginActionTypes {
-  LoadLogins = '[Login] Load Logins'
+  Login = '[Login] Login User',
+  Logout = '[Login] Logout User'
 }
 
-export class LoadLogins implements Action {
-  readonly type = LoginActionTypes.LoadLogins;
+export class Login implements Action {
+  readonly type = LoginActionTypes.Login;
+
+  constructor(readonly payload: {email: string, password: string}) {}
 }
 
-export type LoginActions = LoadLogins;
+export class Logout implements Action {
+  readonly type = LoginActionTypes.Logout;
+}
+
+export type LoginActions = Login | Logout;

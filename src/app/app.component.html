@@ -35,13 +35,13 @@
       <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs>
         <ul fxLayout fxLayoutGap="20px" class="navigation-items">
           <li>
-            <a>
+            <a routerLink="/auth">
               <mat-icon class="icon">input</mat-icon>
               <span  class="label">Login</span>
             </a>
           </li>
           <li>
-            <a >
+            <a routerLink="/">
               <mat-icon class="icon">home</mat-icon>
               <span class="label">Home</span>
             </a>
@@ -62,7 +62,12 @@
       </div>
     </mat-toolbar>
     <main>
+      <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+
+
+
 

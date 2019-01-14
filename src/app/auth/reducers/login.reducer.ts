@@ -12,7 +12,7 @@ export const initialState: State = {
 export function reducer(state = initialState, action: LoginActions): State {
   switch (action.type) {
 
-    case LoginActionTypes.LoadLogins:
+    case LoginActionTypes.Login:
       return state;
 
 

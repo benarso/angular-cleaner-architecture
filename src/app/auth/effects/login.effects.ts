@@ -6,7 +6,11 @@ import { LoginActionTypes } from '../actions/login.actions';
 export class LoginEffects {
 
   @Effect()
-  loadLogins$ = this.actions$.pipe(ofType(LoginActionTypes.LoadLogins));
+
+  login$ = this.actions$.pipe(
+      ofType(LoginActionTypes.Login),
+
+  );
 
   constructor(private actions$: Actions) {}
 }
