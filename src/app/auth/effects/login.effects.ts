@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {Login, LoginActionTypes, Logout} from '../actions/login.actions';
+import {Login, LoginActionTypes, LoginSuccess, Logout} from '../actions/login.actions';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {catchError, map, mergeMap, tap, throttleTime} from 'rxjs/operators';
 import {MockAuthService} from '../services/mock-auth.service';
 import {MatSnackBar} from '@angular/material';
 import {ApiAuthService} from '../services/api-auth.service';
-
+import { Router} from '@angular/router';
 
 // TODO: Fix snackbar hardcoded values using snackbar global settings
 // TODO: Fix throttleTime hardcoded values
@@ -32,6 +32,16 @@ export class LoginEffects {
         tap(action => this.snackbar.open(action.type, 'Dismiss', {duration: 3000}))
     );
 
-    constructor(private authService: ApiAuthService, private snackbar: MatSnackBar, private actions$: Actions) {
+    @Effect({dispatch: false})
+    loginsuccess$: Observable<Action> = this.actions$.pipe(
+      ofType<LoginSuccess>(LoginActionTypes.LoginSuccess),
+        tap(action => {
+            // TODO: save token etc ?
+            this.snackbar.open(action.type, 'Dismiss', {duration: 3000});
+            this.router.navigateByUrl('dashboard');
+        })
+    );
+
+    constructor(private authService: MockAuthService, private router: Router, private snackbar: MatSnackBar, private actions$: Actions) {
     }
 }
