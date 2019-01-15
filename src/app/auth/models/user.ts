@@ -1,4 +1,4 @@
-export interface User {
+export class User {
     jwt?: string;
     user?: {
         username?: string,
