@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: './auth/dashboard.module#DashboardModule'
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
     path: '',
