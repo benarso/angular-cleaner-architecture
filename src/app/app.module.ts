@@ -16,6 +16,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule} from './material/material.module';
 
 import { AppRoutingModule} from './app-routing.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,13 +24,14 @@ import { AppRoutingModule} from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-      AppRoutingModule,
+    AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
     BrowserAnimationsModule,
     FlexLayoutModule,
-      MaterialModule,
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

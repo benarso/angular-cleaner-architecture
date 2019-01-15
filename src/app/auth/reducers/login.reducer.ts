@@ -17,6 +17,11 @@ export function reducer(state = initialState, action: LoginActions): State {
         ...state,
         isLoggedIn: true
       };
+    case LoginActionTypes.Logout:
+      return {
+        ...state,
+        isLoggedIn: false
+      };
     default:
       return state;
   }

@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
         this.snackBar.open('Login clicked', 'Dismiss', {duration: 700});
     }
 
-    onSubmit() {
+    authenticate() {
         // TODO: Use EventEmitter with form value
         this.snackBar.open('Dispatching Login Action', 'Dismiss', {duration: 500});
         this.store.dispatch(new Login({username: this.loginForm.get('username').value, password: this.loginForm.get('password').value}));

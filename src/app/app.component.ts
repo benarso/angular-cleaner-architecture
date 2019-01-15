@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import {AuthModule} from './auth/auth.module';
+import { Store} from '@ngrx/store';
+import {Logout} from './auth/actions/login.actions';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,11 @@ import {AuthModule} from './auth/auth.module';
 })
 export class AppComponent {
   title = 'TodoManager';
+
+  logout() {
+    this.store.dispatch(new Logout());
+  }
+
+  constructor(readonly store: Store<any>) {
+  }
 }
