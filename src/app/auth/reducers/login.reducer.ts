@@ -1,20 +1,20 @@
 import {LoginActions, LoginActionTypes} from '../actions/login.actions';
 import {User} from '../models/user';
 
-export interface State {
+export interface AuthState {
   authenticated: boolean;
   user?: User;
   loading: boolean;
   errorMessage: string;
 }
 
-export const initialState: State = {
+export const initialState: AuthState = {
   authenticated: false,
   loading: false,
   errorMessage: ''
 };
 // TODO: Manage errors
-export function reducer(state = initialState, action: LoginActions): State {
+export function reducer(state = initialState, action: LoginActions): AuthState {
 
   switch (action.type) {
 
