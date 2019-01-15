@@ -10,7 +10,7 @@ import { AuthRoutingModule} from './auth-routing.module';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule} from '@angular/forms';
-
+import { AuthService} from './auth.service';
 
 @NgModule({
   declarations: [LoginPageComponent],
@@ -20,8 +20,8 @@ import { ReactiveFormsModule} from '@angular/forms';
     StoreModule.forFeature('login', fromLogin.reducer),
     StoreModule.forFeature('user', fromUser.reducer),
     EffectsModule.forFeature([LoginEffects, UserEffects]),
-      MaterialModule,
-      ReactiveFormsModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

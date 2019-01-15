@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
-import {Login} from '../../actions/login.actions';
+import {Login, LoginActionTypes} from '../../actions/login.actions';
 import {AppComponent} from '../../../app.component';
+import {filter, map, startWith} from 'rxjs/operators';
 
 
 @Component({
@@ -14,14 +15,15 @@ import {AppComponent} from '../../../app.component';
 export class LoginPageComponent implements OnInit {
 
     loginForm = new FormGroup({
-        username : new FormControl(''),
-        password : new FormControl( ''),
+        username: new FormControl(''),
+        password: new FormControl(''),
     });
 
     constructor(private store: Store<any>, public snackBar: MatSnackBar) {
     }
 
     ngOnInit() {
+        // this.loginForm.valueChanges.subscribe(value => console.warn(value));
     }
 
     login(): void {
@@ -30,8 +32,8 @@ export class LoginPageComponent implements OnInit {
 
     onSubmit() {
         // TODO: Use EventEmitter with form value
-        console.warn(this.loginForm.value);
-        this.snackBar.open(this.loginForm.get('username').value, 'Dismiss', { duration: 500});
+        this.snackBar.open('Dispatching Login Action', 'Dismiss', {duration: 500});
+        this.store.dispatch(new Login({username: this.loginForm.get('username').value, password: this.loginForm.get('password').value}));
     }
 
 }

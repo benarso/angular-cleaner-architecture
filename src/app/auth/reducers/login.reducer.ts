@@ -1,21 +1,22 @@
-import { Action } from '@ngrx/store';
-import { LoginActions, LoginActionTypes } from '../actions/login.actions';
+import {LoginActions, LoginActionTypes} from '../actions/login.actions';
 
 export interface State {
-
+  isLoggedIn: boolean;
 }
 
 export const initialState: State = {
-
+  isLoggedIn: false
 };
 
 export function reducer(state = initialState, action: LoginActions): State {
   switch (action.type) {
-
     case LoginActionTypes.Login:
       return state;
-
-
+    case LoginActionTypes.LoginSuccess:
+      return {
+        ...state,
+        isLoggedIn: true
+      };
     default:
       return state;
   }
