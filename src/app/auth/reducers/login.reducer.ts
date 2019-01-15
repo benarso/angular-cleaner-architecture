@@ -1,11 +1,13 @@
 import {LoginActions, LoginActionTypes} from '../actions/login.actions';
+import {User} from '../models/user';
 
 export interface State {
-  isLoggedIn: boolean;
+  authenticated: boolean;
+  user?: User;
 }
 
 export const initialState: State = {
-  isLoggedIn: false
+  authenticated: false
 };
 
 export function reducer(state = initialState, action: LoginActions): State {
@@ -13,15 +15,14 @@ export function reducer(state = initialState, action: LoginActions): State {
     case LoginActionTypes.Login:
       return state;
     case LoginActionTypes.LoginSuccess:
-      return {
-        ...state,
-        isLoggedIn: true
-      };
+      return Object.assign({}, state, {
+        authenticated: true,
+        user : action.payload.user
+      });
     case LoginActionTypes.Logout:
-      return {
-        ...state,
-        isLoggedIn: false
-      };
+      return Object.assign({}, state, {
+        authenticated: false
+      });
     default:
       return state;
   }
