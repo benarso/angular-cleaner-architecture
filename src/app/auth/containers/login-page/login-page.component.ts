@@ -1,17 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {FormControl} from '@angular/forms';
 
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+    selector: 'app-login-page',
+    templateUrl: './login-page.component.html',
+    styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private store: Store<any>) { }
+    username = new FormControl('');
+    password = new FormControl( '');
 
-  ngOnInit() {
-  }
+
+    constructor(private store: Store<any>) {
+    }
+
+    ngOnInit() {
+    }
+
+    login(): void {
+
+    }
 
 }
