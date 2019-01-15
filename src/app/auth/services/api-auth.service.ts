@@ -4,11 +4,12 @@ import {Observable, of} from 'rxjs';
 import {User} from '../models/user';
 import {HttpClient} from '@angular/common/http';
 import {delay} from 'rxjs/operators';
+import {AuthService} from './auth.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ApiAuthService {
+export class ApiAuthService extends AuthService {
 
     private MOCKUSER: User = {
         user: {
@@ -17,11 +18,7 @@ export class ApiAuthService {
         }
     };
 
-
-    constructor(private http: HttpClient) {
-    }
-
     authenticate(username: string, password: string): Observable<User> {
-        return of(this.MOCKUSER).pipe(delay(1500));
+        return this.http.post('http://arso-strapi.duckdns.org:1337/auth/local', {identifier: username, password: password} );
     }
 }

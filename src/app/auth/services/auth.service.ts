@@ -10,7 +10,7 @@ import {delay} from 'rxjs/operators';
 })
 export abstract class AuthService {
 
-    protected constructor(private http: HttpClient) {
+    protected constructor(protected http: HttpClient) {
     }
 
     abstract authenticate(username: string, password: string): Observable<User>;

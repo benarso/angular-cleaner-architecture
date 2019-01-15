@@ -3,9 +3,10 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Login, LoginActionTypes, Logout} from '../actions/login.actions';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
-import {map, mergeMap, tap, throttleTime} from 'rxjs/operators';
+import {catchError, map, mergeMap, tap, throttleTime} from 'rxjs/operators';
 import {MockAuthService} from '../services/mock-auth.service';
 import {MatSnackBar} from '@angular/material';
+import {ApiAuthService} from '../services/api-auth.service';
 
 
 // TODO: Fix snackbar hardcoded values using snackbar global settings
@@ -21,7 +22,7 @@ export class LoginEffects {
             this.authService.authenticate(action.payload.username, action.payload.password).pipe(
                 map(data => ({type: LoginActionTypes.LoginSuccess, payload: data}))
             )),
-        tap(action => this.snackbar.open(action.type, 'Dismiss', {duration: 3000}))
+        tap(action => this.snackbar.open(action.type, 'Dismiss', {duration: 3000})),
     );
 
     @Effect({dispatch: false})
@@ -31,6 +32,6 @@ export class LoginEffects {
         tap(action => this.snackbar.open(action.type, 'Dismiss', {duration: 3000}))
     );
 
-    constructor(private authService: MockAuthService, private snackbar: MatSnackBar, private actions$: Actions) {
+    constructor(private authService: ApiAuthService, private snackbar: MatSnackBar, private actions$: Actions) {
     }
 }

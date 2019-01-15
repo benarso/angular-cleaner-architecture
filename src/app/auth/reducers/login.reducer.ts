@@ -4,10 +4,12 @@ import {User} from '../models/user';
 export interface State {
   authenticated: boolean;
   user?: User;
+  loading: boolean;
 }
 
 export const initialState: State = {
-  authenticated: false
+  authenticated: false,
+  loading: false
 };
 // TODO: Manage errors
 export function reducer(state = initialState, action: LoginActions): State {
@@ -15,12 +17,15 @@ export function reducer(state = initialState, action: LoginActions): State {
   switch (action.type) {
 
     case LoginActionTypes.Login:
-      return state;
+      return Object.assign({}, state, {
+        loading: true
+      });
 
     case LoginActionTypes.LoginSuccess:
       return Object.assign({}, state, {
         authenticated: true,
-        user : action.payload.user
+        loading: false,
+        user : action.payload
       });
 
     case LoginActionTypes.Logout:
