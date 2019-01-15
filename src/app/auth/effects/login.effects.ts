@@ -18,12 +18,12 @@ export class LoginEffects {
     login$: Observable<Action> = this.actions$.pipe(
         ofType<Login>(LoginActionTypes.Login),
         throttleTime(1500),
+        tap(action => this.snackbar.open(action.type, 'Dismiss', {duration: 3000})),
         mergeMap(action =>
             this.authService.authenticate(action.payload.username, action.payload.password).pipe(
                 map(data => ({type: LoginActionTypes.LoginSuccess, payload: data}))
             )),
-        tap(action => this.snackbar.open(action.type, 'Dismiss', {duration: 3000})),
-    );
+        );
 
     @Effect({dispatch: false})
     logout$: Observable<Action> = this.actions$.pipe(
