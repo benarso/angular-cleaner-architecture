@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
-import {StoreModule, Store} from '@ngrx/store';
 import {Observable, of} from 'rxjs';
-import {User} from './models/user';
-import {HttpClient} from '@angular/common/http';
+import {User} from '../models/user';
 import {delay} from 'rxjs/operators';
+import {AuthService} from './auth.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService {
+export class MockAuthService extends AuthService{
 
     private MOCKUSER: User = {
         user: {
@@ -16,10 +15,6 @@ export class AuthService {
             email: 'user@email.com'
         }
     };
-
-
-    constructor(private http: HttpClient) {
-    }
 
     authenticate(username: string, password: string): Observable<User> {
         return of(this.MOCKUSER).pipe(delay(1500));

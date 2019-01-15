@@ -4,7 +4,7 @@ import {Login, LoginActionTypes, Logout} from '../actions/login.actions';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {map, mergeMap, tap, throttleTime} from 'rxjs/operators';
-import {AuthService} from '../auth.service';
+import {MockAuthService} from '../services/mock-auth.service';
 import {MatSnackBar} from '@angular/material';
 
 
@@ -31,6 +31,6 @@ export class LoginEffects {
         tap(action => this.snackbar.open(action.type, 'Dismiss', {duration: 3000}))
     );
 
-    constructor(private authService: AuthService, private snackbar: MatSnackBar, private actions$: Actions) {
+    constructor(private authService: MockAuthService, private snackbar: MatSnackBar, private actions$: Actions) {
     }
 }
