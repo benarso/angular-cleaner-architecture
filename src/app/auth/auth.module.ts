@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import * as fromLogin from '../auth/reducers/login.reducer';
+import * as fromLogin from './reducers/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { LoginEffects } from '../auth/effects/login.effects';
+import { AuthEffects } from './effects/auth.effects';
 import { AuthRoutingModule} from './auth-routing.module';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
 import { MaterialModule } from '../material/material.module';
@@ -15,8 +15,8 @@ import { ReactiveFormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    StoreModule.forFeature('login', fromLogin.reducer),
-    EffectsModule.forFeature([LoginEffects]),
+    StoreModule.forFeature('auth', fromLogin.reducer),
+    EffectsModule.forFeature([AuthEffects]),
     MaterialModule,
     ReactiveFormsModule
   ],

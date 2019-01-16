@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
-import {Login, LoginActionTypes} from '../../actions/login.actions';
+import {Login, LoginActionTypes} from '../../actions/auth.actions';
 import {AppComponent} from '../../../app.component';
 import {filter, map, startWith} from 'rxjs/operators';
+import {State} from '../../reducers/auth.reducer';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class LoginPageComponent implements OnInit {
         password: new FormControl(''),
     });
 
-    constructor(private store: Store<any>, public snackBar: MatSnackBar) {
+    constructor(private store: Store<State>, public snackBar: MatSnackBar) {
+       // this.authState$ = this.store.select(selectAuthState);
     }
 
     ngOnInit() {

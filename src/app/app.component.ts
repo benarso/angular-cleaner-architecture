@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store} from '@ngrx/store';
-import {Logout} from './auth/actions/login.actions';
+import {Logout} from './auth/actions/auth.actions';
 import {Observable} from 'rxjs';
 
 @Component({
