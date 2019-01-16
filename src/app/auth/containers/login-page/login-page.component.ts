@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material';
 import {Login, LoginActionTypes} from '../../actions/auth.actions';
 import {AppComponent} from '../../../app.component';
 import {filter, map, startWith} from 'rxjs/operators';
-import {State} from '../../reducers/auth.reducer';
+import {AuthState, selectAuthState} from '../../reducers/auth.reducer';
 import {Observable} from 'rxjs';
 
 
@@ -16,17 +16,22 @@ import {Observable} from 'rxjs';
 })
 export class LoginPageComponent implements OnInit {
 
+    authState$: Observable<any>;
+
     loginForm = new FormGroup({
         username: new FormControl(''),
         password: new FormControl(''),
     });
 
-    constructor(private store: Store<State>, public snackBar: MatSnackBar) {
-       // this.authState$ = this.store.select(selectAuthState);
+    constructor(private store: Store<AuthState>, public snackBar: MatSnackBar) {
+        this.authState$ = this.store.select(selectAuthState);
     }
 
     ngOnInit() {
         // this.loginForm.valueChanges.subscribe(value => console.warn(value));
+        this.authState$.subscribe( (state) => {
+            console.warn('ERrrOrrorrrr ' + state.errorMessage);
+        });
     }
 
     login(): void {

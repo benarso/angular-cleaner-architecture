@@ -8,6 +8,7 @@ import {MockAuthService} from '../services/mock-auth.service';
 import {MatSnackBar} from '@angular/material';
 import {ApiAuthService} from '../services/api-auth.service';
 import { Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
 
 // TODO: Fix snackbar hardcoded values using snackbar global settings
 // TODO: Fix throttleTime hardcoded values
@@ -25,8 +26,8 @@ export class AuthEffects {
                 map(user => {
                     return new LoginSuccess(user);
                 }),
-                catchError((error) => {
-                    return of(new LoginFailed(error));
+                catchError((error: HttpErrorResponse) => {
+                    return of(new LoginFailed(error.message));
                 })
             );
         }));
@@ -53,6 +54,6 @@ export class AuthEffects {
         })
     );
 
-    constructor(private authService: MockAuthService, private router: Router, private snackbar: MatSnackBar, private actions$: Actions) {
+    constructor(private authService: ApiAuthService, private router: Router, private snackbar: MatSnackBar, private actions$: Actions) {
     }
 }
