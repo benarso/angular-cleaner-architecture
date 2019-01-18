@@ -13,7 +13,7 @@ import {EMAIL_VALIDATOR} from '@angular/forms/src/directives/validators';
 @Component({
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
-    styleUrls: ['./login-page.component.css']
+    styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
 
@@ -26,6 +26,14 @@ export class LoginPageComponent implements OnInit {
 
     constructor(private store: Store<AuthState>, public snackBar: MatSnackBar) {
         this.authState$ = this.store.select(selectAuthState);
+    }
+
+    username() {
+        return this.loginForm.get('username');
+    }
+
+    password() {
+        return this.loginForm.get('password');
     }
 
     ngOnInit() {
