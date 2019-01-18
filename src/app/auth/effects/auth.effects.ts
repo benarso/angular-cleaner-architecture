@@ -12,6 +12,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 
 // TODO: Fix snackbar hardcoded values using snackbar global settings
 // TODO: Fix throttleTime hardcoded values
+// TODO: Use cookies instead of localstorage (even better implicit grant oauth)
 @Injectable()
 export class AuthEffects {
 

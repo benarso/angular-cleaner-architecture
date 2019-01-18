@@ -1,6 +1,6 @@
 import {AuthActions, LoginActionTypes} from '../actions/auth.actions';
 import {User} from '../models/user';
-import { createFeatureSelector} from '@ngrx/store';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 export interface AuthState {
   authenticated: boolean;
@@ -10,6 +10,7 @@ export interface AuthState {
 }
 
 export const selectAuthState = createFeatureSelector<AuthState>('auth');
+export const selectAuthenticated = (state: AuthState) => state.authenticated;
 
 export const initialState: AuthState = {
   authenticated: false,

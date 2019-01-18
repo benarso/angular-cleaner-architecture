@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, EmailValidator, FormControl, FormGroup, ValidationErrors, Validator, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
 import {Login, LoginActionTypes} from '../../actions/auth.actions';
 import {AppComponent} from '../../../app.component';
 import {filter, map, startWith} from 'rxjs/operators';
 import {AuthState, selectAuthState} from '../../reducers/auth.reducer';
 import {Observable} from 'rxjs';
+import {EMAIL_VALIDATOR} from '@angular/forms/src/directives/validators';
 
 
 @Component({
@@ -19,8 +20,8 @@ export class LoginPageComponent implements OnInit {
     authState$: Observable<any>;
 
     loginForm = new FormGroup({
-        username: new FormControl(''),
-        password: new FormControl(''),
+        username: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
     });
 
     constructor(private store: Store<AuthState>, public snackBar: MatSnackBar) {
@@ -30,7 +31,7 @@ export class LoginPageComponent implements OnInit {
     ngOnInit() {
         // this.loginForm.valueChanges.subscribe(value => console.warn(value));
         this.authState$.subscribe( (state) => {
-            console.warn('ERrrOrrorrrr ' + state.errorMessage);
+            // console.warn('ERrrOrrorrrr ' + state.errorMessage);
         });
     }
 
