@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import {Observable} from 'rxjs';
 import * as fromAuth from '../../../auth/reducers';
 import {User} from '../../../auth/models/user';
+import {State} from '../../../auth/reducers';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -11,15 +12,15 @@ import {User} from '../../../auth/models/user';
 })
 export class DashboardPageComponent implements OnInit {
 
-  // user$: Observable<User>;
-  // user: User;
+  user$: Observable<User>;
+  user: User;
 
-  constructor(private store: Store<any>) {
-    // this.user$ = this.store.select(fromAuth.selectAuthUser);
+  constructor(private store: Store<State>) {
+     this.user$ = this.store.select(fromAuth.selectAuthUser);
   }
 
   ngOnInit() {
-    // this.user$.subscribe(user => this.user = user);
+    this.user$.subscribe(user => this.user = user);
   }
 
 }
