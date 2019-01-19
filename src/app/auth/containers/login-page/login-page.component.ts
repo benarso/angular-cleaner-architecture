@@ -8,6 +8,7 @@ import {filter, map, startWith} from 'rxjs/operators';
 import {AuthState, selectAuthState} from '../../reducers/auth.reducer';
 import {Observable} from 'rxjs';
 import {EMAIL_VALIDATOR} from '@angular/forms/src/directives/validators';
+import {LoginCredentials} from '../../models/login-credentials';
 
 
 @Component({
@@ -19,21 +20,8 @@ export class LoginPageComponent implements OnInit {
 
     authState$: Observable<any>;
 
-    loginForm = new FormGroup({
-        username: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required),
-    });
-
     constructor(private store: Store<AuthState>, public snackBar: MatSnackBar) {
         this.authState$ = this.store.select(selectAuthState);
-    }
-
-    username() {
-        return this.loginForm.get('username');
-    }
-
-    password() {
-        return this.loginForm.get('password');
     }
 
     ngOnInit() {
@@ -43,14 +31,11 @@ export class LoginPageComponent implements OnInit {
         });
     }
 
-    login(): void {
 
+    authenticate(credentials: LoginCredentials) {
+        this.store.dispatch(new Login(credentials));
     }
 
-    authenticate() {
-        // TODO: Use EventEmitter with form value
-
-        this.store.dispatch(new Login({username: this.loginForm.get('username').value, password: this.loginForm.get('password').value}));
-    }
+    //onLogin (react to child emitted event and dispatch action
 
 }

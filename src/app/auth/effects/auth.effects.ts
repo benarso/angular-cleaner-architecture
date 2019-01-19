@@ -23,7 +23,7 @@ export class AuthEffects {
         tap(action => this.snackbar.open(action.type, 'Dismiss', {duration: 3000})),
         map((action: Login) => action.payload),
         switchMap(payload => {
-            return this.authService.authenticate(payload.username, payload.password).pipe(
+            return this.authService.authenticate(payload).pipe(
                 map(user => {
                     return new LoginSuccess(user);
                 }),
@@ -45,7 +45,7 @@ export class AuthEffects {
     );
 
     @Effect({dispatch: false})
-    loginsuccess$: Observable<any> = this.actions$.pipe(
+    loginSuccess$: Observable<any> = this.actions$.pipe(
       ofType<LoginSuccess>(LoginActionTypes.LoginSuccess),
         tap(action => {
             // TODO: save token etc ?

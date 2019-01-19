@@ -8,10 +8,11 @@ import { AuthRoutingModule} from './auth-routing.module';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule} from '@angular/forms';
+import { LoginComponent } from '../auth/components/login/login.component';
 
 
 @NgModule({
-  declarations: [LoginPageComponent],
+  declarations: [LoginPageComponent, LoginComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
