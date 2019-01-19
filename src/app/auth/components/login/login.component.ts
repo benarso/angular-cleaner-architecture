@@ -2,8 +2,6 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginCredentials} from '../../models/login-credentials';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   authenticate() {

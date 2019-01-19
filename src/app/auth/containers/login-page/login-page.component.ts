@@ -1,41 +1,32 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {AbstractControl, EmailValidator, FormControl, FormGroup, ValidationErrors, Validator, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
-import {Login, LoginActionTypes} from '../../actions/auth.actions';
-import {AppComponent} from '../../../app.component';
-import {filter, map, startWith} from 'rxjs/operators';
-import {AuthState, selectAuthState} from '../../reducers/auth.reducer';
+import {Login} from '../../actions/auth.actions';
 import {Observable} from 'rxjs';
-import {EMAIL_VALIDATOR} from '@angular/forms/src/directives/validators';
 import {LoginCredentials} from '../../models/login-credentials';
-
+import * as fromAuth from '../../reducers';
 
 @Component({
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
     styleUrls: ['./login-page.component.scss']
 })
+
 export class LoginPageComponent implements OnInit {
 
     authState$: Observable<any>;
 
-    constructor(private store: Store<AuthState>, public snackBar: MatSnackBar) {
-        this.authState$ = this.store.select(selectAuthState);
+
+    constructor(private store: Store<fromAuth.State>, public snackBar: MatSnackBar) {
+        // this.authState$ = this.store.select(fromAuth.selectAuthState);
+
     }
 
     ngOnInit() {
         // this.loginForm.valueChanges.subscribe(value => console.warn(value));
-        this.authState$.subscribe( (state) => {
-            // console.warn('ERrrOrrorrrr ' + state.errorMessage);
-        });
     }
-
 
     authenticate(credentials: LoginCredentials) {
         this.store.dispatch(new Login(credentials));
     }
-
-    //onLogin (react to child emitted event and dispatch action
-
 }

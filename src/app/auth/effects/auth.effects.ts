@@ -12,7 +12,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 
 // TODO: Fix snackbar hardcoded values using snackbar global settings
 // TODO: Fix throttleTime hardcoded values
-// TODO: Use cookies instead of localstorage (even better implicit grant oauth)
+// TODO: Use cookies or other strategy to store token instead of localstorage
 @Injectable()
 export class AuthEffects {
 
@@ -55,6 +55,6 @@ export class AuthEffects {
         })
     );
 
-    constructor(private authService: ApiAuthService, private router: Router, private snackbar: MatSnackBar, private actions$: Actions) {
+    constructor(private authService: MockAuthService, private router: Router, private snackbar: MatSnackBar, private actions$: Actions) {
     }
 }

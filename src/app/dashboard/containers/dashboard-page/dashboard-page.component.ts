@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import {Observable} from 'rxjs';
+import * as fromAuth from '../../../auth/reducers';
+import {User} from '../../../auth/models/user';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -8,9 +11,15 @@ import { Store } from '@ngrx/store';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor(private store: Store<any>) { }
+  // user$: Observable<User>;
+  // user: User;
+
+  constructor(private store: Store<any>) {
+    // this.user$ = this.store.select(fromAuth.selectAuthUser);
+  }
 
   ngOnInit() {
+    // this.user$.subscribe(user => this.user = user);
   }
 
 }

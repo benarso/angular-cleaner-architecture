@@ -2,24 +2,25 @@ import {AuthActions, LoginActionTypes} from '../actions/auth.actions';
 import {User} from '../models/user';
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 
-export interface AuthState {
+export interface State {
   authenticated: boolean;
   user?: User;
   loading: boolean;
   errorMessage: string;
 }
 
-export const selectAuthState = createFeatureSelector<AuthState>('auth');
-export const selectAuthenticated = (state: AuthState) => state.authenticated;
+// export const selectAuthState = createFeatureSelector<State>('auth');
+// export const selectAuthenticated = (state: State) => state.authenticated;
 
-export const initialState: AuthState = {
+export const initialState: State = {
   authenticated: false,
+  user: null,
   loading: false,
   errorMessage: ''
 };
 
 // TODO: Manage errors
-export function reducer(state = initialState, action: AuthActions): AuthState {
+export function reducer(state = initialState, action: AuthActions): State {
 
   switch (action.type) {
 
@@ -52,3 +53,8 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
       return state;
   }
 }
+
+export const getAuthenticated = (state: State) => state.authenticated;
+export const getUser = (state: State) => state.user;
+export const getLoading = (state: State) => state.loading;
+export const getErrorMessage = (state: State) => state.errorMessage;
