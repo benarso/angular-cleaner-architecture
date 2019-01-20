@@ -15,6 +15,10 @@ export class AppComponent {
     this.store.dispatch(new Logout());
   }
 
+  login(){
+  }
+
   constructor(readonly store: Store<any>) {
+
   }
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ActionReducer, StoreModule} from '@ngrx/store';
 import * as fromAuth from './reducers/auth.reducer';
@@ -10,6 +10,8 @@ import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from '../auth/components/login/login.component';
 import { LocalStorageConfig, localStorageSync} from 'ngrx-store-localstorage';
+
+
 
 @NgModule({
   declarations: [LoginPageComponent, LoginComponent],
@@ -23,4 +25,12 @@ import { LocalStorageConfig, localStorageSync} from 'ngrx-store-localstorage';
   ],
   providers: []
 })
-export class AuthModule { }
+
+export class AuthModule {
+  constructor (@Optional() @SkipSelf() parentModule: AuthModule) {
+    if (parentModule) {
+      throw new Error(
+          'AuthModule is already loaded. Import it in the AppModule only');
+    }
+  }
+}

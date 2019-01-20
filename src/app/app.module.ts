@@ -18,6 +18,7 @@ import { MaterialModule} from './material/material.module';
 import { AppRoutingModule} from './app-routing.module';
 import { HttpClientModule} from '@angular/common/http';
 import { LocalStorageConfig, localStorageSync} from 'ngrx-store-localstorage';
+import {AuthModule} from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LocalStorageConfig, localStorageSync} from 'ngrx-store-localstorage';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
