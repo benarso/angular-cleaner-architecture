@@ -1,13 +1,12 @@
 import {Action} from '@ngrx/store';
 import {User} from '../models/user';
-import {HttpErrorResponse} from '@angular/common/http';
 import {LoginCredentials} from '../models/login-credentials';
 
 export enum LoginActionTypes {
     Login = '[Auth] Login User',
     Logout = '[Auth] Logout User',
     LoginSuccess = '[Auth] Login Success',
-    LoginFailed = '[Auth] Login Failed'
+    LoginFailed = '[Auth] Login Failed',
 }
 
 export class Login implements Action {

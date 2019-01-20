@@ -5,7 +5,6 @@ import {Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {catchError, map, mergeMap, switchMap, tap, throttleTime} from 'rxjs/operators';
 import {MockAuthService} from '../services/mock-auth.service';
-import {MatSnackBar} from '@angular/material';
 import {ApiAuthService} from '../services/api-auth.service';
 import { Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -20,7 +19,6 @@ export class AuthEffects {
     login$: Observable<any> = this.actions$.pipe(
         ofType<Login>(LoginActionTypes.Login),
         throttleTime(1500),
-        tap(action => this.snackbar.open(action.type, 'Dismiss', {duration: 3000})),
         map((action: Login) => action.payload),
         switchMap(payload => {
             return this.authService.authenticate(payload).pipe(
@@ -39,8 +37,7 @@ export class AuthEffects {
         ofType<Logout>(LoginActionTypes.Logout),
         throttleTime(1500),
         tap(action => {
-            this.snackbar.open(action.type, 'Dismiss', {duration: 3000});
-            localStorage.removeItem('jwt');
+            // TODO: redirect
         })
     );
 
@@ -49,12 +46,10 @@ export class AuthEffects {
       ofType<LoginSuccess>(LoginActionTypes.LoginSuccess),
         tap(action => {
             // TODO: save token etc ?
-            this.snackbar.open(action.type, 'Dismiss', {duration: 3000});
-            localStorage.setItem('jwt', action.payload.jwt);
             this.router.navigateByUrl('dashboard');
         })
     );
 
-    constructor(private authService: MockAuthService, private router: Router, private snackbar: MatSnackBar, private actions$: Actions) {
+    constructor(private authService: MockAuthService, private router: Router, private actions$: Actions) {
     }
 }

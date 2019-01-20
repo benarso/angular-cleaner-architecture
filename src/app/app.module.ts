@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { StoreModule } from '@ngrx/store';
+import {ActionReducer, StoreModule} from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './reducers';
 
@@ -17,6 +17,11 @@ import { MaterialModule} from './material/material.module';
 
 import { AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
+import {LocalStorageConfig, localStorageSync} from 'ngrx-store-localstorage';
+
+
+
+
 
 @NgModule({
   declarations: [
