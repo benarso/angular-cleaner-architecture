@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {Login, LoginActionTypes, LoginFailed, LoginSuccess, Logout} from '../actions/auth.actions';
+import {Login, LoginActionTypes, LoginFailed, LoginRedirect, LoginSuccess, Logout} from '../actions/auth.actions';
 import {Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {catchError, map, mergeMap, switchMap, tap, throttleTime} from 'rxjs/operators';
@@ -47,6 +47,14 @@ export class AuthEffects {
         tap(action => {
             // TODO: save token etc ?
             this.router.navigateByUrl('dashboard');
+        })
+    );
+
+    @Effect({dispatch: false})
+    loginRedirect$: Observable<any> = this.actions$.pipe(
+        ofType<LoginRedirect>(LoginActionTypes.LoginRedirect),
+        tap(action => {
+            this.router.navigateByUrl('login');
         })
     );
 

@@ -8,7 +8,7 @@ import { DashboardPageComponent } from './containers/dashboard-page/dashboard-pa
   declarations: [DashboardPageComponent],
   imports: [
     CommonModule,
-      MaterialModule,
+    MaterialModule,
     DashboardRoutingModule
   ]
 })

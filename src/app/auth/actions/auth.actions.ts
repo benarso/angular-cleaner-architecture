@@ -8,6 +8,7 @@ export enum LoginActionTypes {
     Logout = '[Auth] Logout User',
     LoginSuccess = '[Auth] Login Success',
     LoginFailed = '[Auth] Login Failed',
+    LoginRedirect = '[Auth] Login redirect'
 }
 
 export class Login implements Action {
@@ -35,4 +36,8 @@ export class Logout implements Action {
     readonly type = LoginActionTypes.Logout;
 }
 
-export type AuthActions = Login | Logout | LoginSuccess | LoginFailed;
+export class LoginRedirect implements Action {
+    readonly  type = LoginActionTypes.LoginRedirect;
+}
+
+export type AuthActions = Login | Logout | LoginSuccess | LoginFailed | LoginRedirect;

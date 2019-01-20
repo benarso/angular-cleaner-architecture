@@ -14,3 +14,4 @@ export const reducers = {
 
 export const selectAuth = createFeatureSelector<fromAuth.State>('auth');
 export const selectAuthUser = createSelector(selectAuth, fromAuth.getUser);
+export const selectAuthAuthenticated = createSelector(selectAuth, fromAuth.getAuthenticated);
