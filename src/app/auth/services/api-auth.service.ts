@@ -6,21 +6,16 @@ import {HttpClient} from '@angular/common/http';
 import {delay} from 'rxjs/operators';
 import {AuthService} from './auth.service';
 import {LoginCredentials} from '../models/login-credentials';
+import {AuthenticatedResponse} from '../models/authenticated-response';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiAuthService extends AuthService {
 
-    private MOCKUSER: User = {
-        user: {
-            username: 'Ben',
-            email: 'user@email.com'
-        }
-    };
 
-    authenticate(credentials: LoginCredentials): Observable<User> {
-        return this.http.post('http://arso-strapi.duckdns.org:1337/auth/local',
+    authenticate(credentials: LoginCredentials): Observable<AuthenticatedResponse> {
+        return this.http.post<AuthenticatedResponse>('http://arso-strapi.duckdns.org:1337/auth/local',
             {identifier: credentials.username, password: credentials.password}
             );
     }

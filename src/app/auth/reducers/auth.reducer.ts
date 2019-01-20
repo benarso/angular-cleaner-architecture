@@ -5,7 +5,7 @@ import {createFeatureSelector, createSelector} from '@ngrx/store';
 export interface State {
   authenticated: boolean;
   user: User;
-  token: string;
+  jwt: string;
   loading: boolean;
   errorMessage: string;
 }
@@ -16,7 +16,7 @@ export interface State {
 export const initialState: State = {
   authenticated: false,
   user: undefined,
-  token: '',
+  jwt: undefined,
   loading: false,
   errorMessage: ''
 };
@@ -36,7 +36,8 @@ export function reducer(state = initialState, action: AuthActions): State {
         authenticated: true,
         loading: false,
         errorMessage: '',
-        user : action.payload
+        user : action.payload.user,
+        jwt: action.payload.jwt
       });
 
     case LoginActionTypes.LoginFailed:
@@ -60,3 +61,4 @@ export const getAuthenticated = (state: State) => state.authenticated;
 export const getUser = (state: State) => state.user;
 export const getLoading = (state: State) => state.loading;
 export const getErrorMessage = (state: State) => state.errorMessage;
+export const getJwt = (state: State) => state.jwt;

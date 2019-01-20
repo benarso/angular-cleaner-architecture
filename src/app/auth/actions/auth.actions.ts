@@ -1,6 +1,7 @@
 import {Action} from '@ngrx/store';
 import {User} from '../models/user';
 import {LoginCredentials} from '../models/login-credentials';
+import {AuthenticatedResponse} from '../models/authenticated-response';
 
 export enum LoginActionTypes {
     Login = '[Auth] Login User',
@@ -19,7 +20,7 @@ export class Login implements Action {
 export class LoginSuccess implements Action {
     readonly type = LoginActionTypes.LoginSuccess;
 
-    constructor(readonly payload: User) {
+    constructor(readonly payload: AuthenticatedResponse) {
     }
 }
 
