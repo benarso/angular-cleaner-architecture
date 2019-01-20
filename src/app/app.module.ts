@@ -16,12 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule} from './material/material.module';
 
 import { AppRoutingModule} from './app-routing.module';
-import {HttpClientModule} from '@angular/common/http';
-import {LocalStorageConfig, localStorageSync} from 'ngrx-store-localstorage';
-
-
-
-
+import { HttpClientModule} from '@angular/common/http';
+import { LocalStorageConfig, localStorageSync} from 'ngrx-store-localstorage';
 
 @NgModule({
   declarations: [
