@@ -1,24 +1,24 @@
-import { Component } from '@angular/core';
-import { Store} from '@ngrx/store';
+import {Component} from '@angular/core';
+import {Store} from '@ngrx/store';
 import {Logout} from './auth/actions/auth.actions';
 import {Observable} from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'TodoManager';
+    title = 'TodoManager';
 
-  logout() {
-    this.store.dispatch(new Logout());
-  }
+    logout() {
+        this.store.dispatch(new Logout());
+    }
 
-  login(){
-  }
+    login() {
+    }
 
-  constructor(readonly store: Store<any>) {
+    constructor(readonly store: Store<any>) {
 
-  }
+    }
 }

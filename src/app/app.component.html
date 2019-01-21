@@ -1,70 +1,70 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-sidenav-container>
-  <mat-sidenav  #sidenav role="navigation">
-    <mat-nav-list>
-      <a mat-list-item>
-        <mat-icon class="icon">input</mat-icon>
-        <span class="label">Login</span>
-      </a>
-      <a mat-list-item>
-        <mat-icon class="icon">home</mat-icon>
-        <span class="label">Home</span>
-      </a>
-      <a mat-list-item>
-        <mat-icon class="icon">dashboard</mat-icon>
-        <span class="label">Dashboard</span>
-      </a>
-      <a  mat-list-item type="button">
-        <mat-icon class="icon">input</mat-icon>
-        <span class="label">LogOut</span>
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <div fxHide.gt-xs>
-        <button mat-icon-button>
-          <mat-icon>menu</mat-icon>
-        </button>
-      </div>
-      <div>
-        <a>
-          Material Blog
-        </a>
-      </div>
-      <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs>
-        <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-          <li>
-            <a routerLink="/login">
-              <mat-icon class="icon">input</mat-icon>
-              <span  class="label">Login</span>
+    <mat-sidenav #sidenav role="navigation">
+        <mat-nav-list>
+            <a mat-list-item>
+                <mat-icon class="icon">input</mat-icon>
+                <span class="label">Login</span>
             </a>
-          </li>
-          <li>
-            <a routerLink="/">
-              <mat-icon class="icon">home</mat-icon>
-              <span class="label">Home</span>
+            <a mat-list-item>
+                <mat-icon class="icon">home</mat-icon>
+                <span class="label">Home</span>
             </a>
-          </li>
-          <li>
-            <a>
-              <mat-icon class="icon">dashboard</mat-icon>
-              <span class="label">Dashboard</span>
+            <a mat-list-item>
+                <mat-icon class="icon">dashboard</mat-icon>
+                <span class="label">Dashboard</span>
             </a>
-          </li>
-          <li>
-            <a (click)="logout()">
-              <mat-icon class="icon">input</mat-icon>
-              <span class="label">LogOut</span>
+            <a mat-list-item type="button">
+                <mat-icon class="icon">input</mat-icon>
+                <span class="label">LogOut</span>
             </a>
-          </li>
-        </ul>
-      </div>
-    </mat-toolbar>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-  </mat-sidenav-content>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <div fxHide.gt-xs>
+                <button mat-icon-button>
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
+            <div>
+                <a>
+                    Material Blog
+                </a>
+            </div>
+            <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+                <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+                    <li>
+                        <a routerLink="/login">
+                            <mat-icon class="icon">input</mat-icon>
+                            <span class="label">Login</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/">
+                            <mat-icon class="icon">home</mat-icon>
+                            <span class="label">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <mat-icon class="icon">dashboard</mat-icon>
+                            <span class="label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="logout()">
+                            <mat-icon class="icon">input</mat-icon>
+                            <span class="label">LogOut</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </mat-toolbar>
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+    </mat-sidenav-content>
 </mat-sidenav-container>
 
 

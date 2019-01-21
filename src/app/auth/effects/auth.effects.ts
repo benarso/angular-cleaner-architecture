@@ -58,6 +58,6 @@ export class AuthEffects {
         })
     );
 
-    constructor(private authService: MockAuthService, private router: Router, private actions$: Actions) {
+    constructor(private authService: ApiAuthService, private router: Router, private actions$: Actions) {
     }
 }

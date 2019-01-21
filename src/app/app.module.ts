@@ -1,42 +1,47 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 
 import {ActionReducer, StoreModule} from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { reducers, metaReducers } from './reducers';
+import {EffectsModule} from '@ngrx/effects';
+import {reducers, metaReducers} from './reducers';
 
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
 
-import { AppEffects } from './app.effects';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule} from './material/material.module';
+import {AppEffects} from './app.effects';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MaterialModule} from './material/material.module';
 
-import { AppRoutingModule} from './app-routing.module';
-import { HttpClientModule} from '@angular/common/http';
-import { LocalStorageConfig, localStorageSync} from 'ngrx-store-localstorage';
+import {AppRoutingModule} from './app-routing.module';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthModule} from './auth/auth.module';
+import {BearerTokenInterceptor} from './auth/services/interceptors/bearer-token-interceptor';
+import {RedirectUnauthorizedInterceptor} from './auth/services/interceptors/redirect-unauthorized-interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects]),
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MaterialModule,
-    HttpClientModule,
-    AuthModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        StoreModule.forRoot(reducers, {metaReducers}),
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
+        EffectsModule.forRoot([AppEffects]),
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MaterialModule,
+        HttpClientModule,
+        AuthModule
+    ],
+    providers: [
+        {provide: HTTP_INTERCEPTORS, useClass: BearerTokenInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: RedirectUnauthorizedInterceptor, multi: true}
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

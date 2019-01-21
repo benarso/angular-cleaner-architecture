@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import * as fromAuth from '../../../auth/reducers';
-import {User} from '../../../auth/models/user';
 import {State} from '../../../auth/reducers';
+import {User} from '../../../auth/models/user';
 
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
-  styleUrls: ['./dashboard-page.component.scss']
+  styleUrls: ['./dashboard-page.component.scss'],
 })
 export class DashboardPageComponent implements OnInit {
 
