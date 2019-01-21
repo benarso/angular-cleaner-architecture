@@ -4,11 +4,11 @@ import {LoginCredentials} from '../models/login-credentials';
 import {LoginResponse} from '../models/login-response';
 
 export enum LoginActionTypes {
-    Login = '[Auth] Login User',
-    Logout = '[Auth] Logout User',
-    LoginSuccess = '[Auth] Login Success',
-    LoginFailed = '[Auth] Login Failed',
-    LoginRedirect = '[Auth] Login redirect'
+    Login = '[Login Page] Login User',
+    Logout = '[App Navbar] Logout User',
+    LoginSuccess = '[Auth API] Login Success',
+    LoginFailed = '[Auth API] Login Failed',
+    LoginRedirect = '[Auth API] Login redirect'
 }
 
 export class Login implements Action {
