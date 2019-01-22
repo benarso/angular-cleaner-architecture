@@ -1,24 +1,31 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {Login, LoginActionTypes, LoginFailed, LoginRedirect, LoginSuccess, Logout} from '../actions/auth.actions';
+import {
+    AuthGuardRedirect,
+    DashboardRedirect,
+    Login,
+    LoginActionTypes,
+    LoginFailed,
+    LoginRedirect,
+    LoginSuccess,
+    Logout
+} from '../actions/auth.actions';
 import {Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
-import {catchError, map, mergeMap, switchMap, tap, throttleTime} from 'rxjs/operators';
+import {catchError, map, mapTo, switchMap, tap, throttleTime} from 'rxjs/operators';
 import {MockAuthService} from '../services/mock-auth.service';
-import {ApiAuthService} from '../services/api-auth.service';
 import { Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 
-// TODO: Fix snackbar hardcoded values using snackbar global settings
-// TODO: Fix throttleTime hardcoded values
-// TODO: Use cookies or other strategy to store token instead of localstorage
+export const THROTTLE_TIME = 1500;
+
 @Injectable()
 export class AuthEffects {
 
     @Effect()
     login$: Observable<any> = this.actions$.pipe(
         ofType<Login>(LoginActionTypes.Login),
-        throttleTime(1500),
+        throttleTime(THROTTLE_TIME),
         map((action: Login) => action.payload),
         switchMap(payload => {
             return this.authService.authenticate(payload).pipe(
@@ -31,33 +38,43 @@ export class AuthEffects {
             );
         }));
 
-
-    @Effect({dispatch: false})
+    @Effect()
     logout$: Observable<Action> = this.actions$.pipe(
         ofType<Logout>(LoginActionTypes.Logout),
-        throttleTime(1500),
-        tap(action => {
-            // TODO: redirect
-        })
+        throttleTime(THROTTLE_TIME),
+        mapTo(new LoginRedirect())
     );
 
-    @Effect({dispatch: false})
+    @Effect()
     loginSuccess$: Observable<any> = this.actions$.pipe(
       ofType<LoginSuccess>(LoginActionTypes.LoginSuccess),
-        tap(action => {
-            // TODO: save token etc ?
-            this.router.navigateByUrl('dashboard');
-        })
+        mapTo(new DashboardRedirect())
     );
 
     @Effect({dispatch: false})
     loginRedirect$: Observable<any> = this.actions$.pipe(
-        ofType<LoginRedirect>(LoginActionTypes.LoginRedirect),
+        ofType<LoginRedirect>(LoginActionTypes.LogoutRedirect),
         tap(action => {
             this.router.navigateByUrl('login');
         })
     );
 
-    constructor(private authService: ApiAuthService, private router: Router, private actions$: Actions) {
+    @Effect({dispatch: false})
+    dashboardRedirect: Observable<any> = this.actions$.pipe(
+        ofType<DashboardRedirect>(LoginActionTypes.DashboardRedirect),
+        tap(action => {
+            this.router.navigateByUrl('dashboard');
+        })
+    );
+
+    @Effect({dispatch: false})
+    authGuardRedirect: Observable<any> = this.actions$.pipe(
+        ofType<AuthGuardRedirect>(LoginActionTypes.AuthGuardRedirect),
+        tap(action => {
+            this.router.navigateByUrl('login');
+        })
+    );
+
+    constructor(private authService: MockAuthService, private router: Router, private actions$: Actions) {
     }
 }

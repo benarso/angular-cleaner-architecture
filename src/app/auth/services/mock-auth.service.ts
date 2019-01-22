@@ -17,6 +17,6 @@ export class MockAuthService extends AuthService {
     };
 
     authenticate(credentials: LoginCredentials): Observable<LoginResponse> {
-        return of(this.MOCKRESPONSE).pipe(delay(2000));
+        return of(this.MOCKRESPONSE).pipe(delay(2500));
     }
 }

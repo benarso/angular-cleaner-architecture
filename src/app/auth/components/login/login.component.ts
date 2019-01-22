@@ -10,6 +10,7 @@ import {LoginCredentials} from '../../models/login-credentials';
 export class LoginComponent implements OnInit {
 
   @Output() login = new EventEmitter<LoginCredentials>();
+  @Input() loading;
 
   constructor() { }
 

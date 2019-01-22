@@ -34,7 +34,7 @@
             </div>
             <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
                 <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-                    <li>
+                    <li *ngIf="!authenticated">
                         <a routerLink="/login">
                             <mat-icon class="icon">input</mat-icon>
                             <span class="label">Login</span>
@@ -47,12 +47,12 @@
                         </a>
                     </li>
                     <li>
-                        <a>
+                        <a routerLink="/dashboard">
                             <mat-icon class="icon">dashboard</mat-icon>
                             <span class="label">Dashboard</span>
                         </a>
                     </li>
-                    <li>
+                    <li *ngIf="authenticated">
                         <a (click)="logout()">
                             <mat-icon class="icon">input</mat-icon>
                             <span class="label">LogOut</span>

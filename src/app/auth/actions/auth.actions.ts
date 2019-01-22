@@ -4,11 +4,13 @@ import {LoginCredentials} from '../models/login-credentials';
 import {LoginResponse} from '../models/login-response';
 
 export enum LoginActionTypes {
-    Login = '[Login Page] Login User',
-    Logout = '[App Navbar] Logout User',
+    Login = '[Login Component] Login User',
+    Logout = '[NavBar] Logout User',
     LoginSuccess = '[Auth API] Login Success',
-    LoginFailed = '[Auth API] Login Failed',
-    LoginRedirect = '[Auth API] Login redirect'
+    LoginFailed = '[Auth API] Login Failure',
+    LogoutRedirect = '[Logout Action] Redirect to login',
+    DashboardRedirect = '[LoginSuccess Action] Redirect to dashboard',
+    AuthGuardRedirect = '[AuthGuard Service] Redirect to login',
 }
 
 export class Login implements Action {
@@ -37,7 +39,15 @@ export class Logout implements Action {
 }
 
 export class LoginRedirect implements Action {
-    readonly  type = LoginActionTypes.LoginRedirect;
+    readonly  type = LoginActionTypes.LogoutRedirect;
 }
 
-export type AuthActions = Login | Logout | LoginSuccess | LoginFailed | LoginRedirect;
+export class DashboardRedirect implements Action {
+    readonly  type = LoginActionTypes.DashboardRedirect;
+}
+
+export class AuthGuardRedirect implements Action {
+    readonly  type = LoginActionTypes.AuthGuardRedirect;
+}
+
+export type AuthActions = Login | Logout | LoginSuccess | LoginFailed | LoginRedirect | DashboardRedirect | AuthGuardRedirect;

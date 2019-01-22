@@ -9,7 +9,7 @@ import { LoginPageComponent } from './containers/login-page/login-page.component
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from '../auth/components/login/login.component';
-import {AuthGuardService} from './services/auth-guard.service';
+import {AuthGuardService} from './services/guards/auth-guard.service';
 
 @NgModule({
   declarations: [LoginPageComponent, LoginComponent],

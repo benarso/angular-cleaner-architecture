@@ -1,2 +1,5 @@
-<app-login (login)="authenticate($event)"></app-login>
+<div fxLayout="column" >
+<app-login [loading]="loading$ | async" (login)="authenticate($event)"></app-login>
+</div>
+
 
