@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 
-import {ActionReducer, StoreModule} from '@ngrx/store';
+import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {reducers, metaReducers} from './reducers';
 
@@ -20,6 +20,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthModule} from './auth/auth.module';
 import {BearerTokenInterceptor} from './auth/services/interceptors/bearer-token-interceptor';
 import {RedirectUnauthorizedInterceptor} from './auth/services/interceptors/redirect-unauthorized-interceptor';
+import {CoreModule} from './core/core.module';
+import {TodoModule} from './todo/todo.module';
 
 @NgModule({
     declarations: [
@@ -34,8 +36,10 @@ import {RedirectUnauthorizedInterceptor} from './auth/services/interceptors/redi
         BrowserAnimationsModule,
         FlexLayoutModule,
         MaterialModule,
+        CoreModule,
         HttpClientModule,
-        AuthModule
+        AuthModule,
+        TodoModule
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: BearerTokenInterceptor, multi: true},

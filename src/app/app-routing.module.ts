@@ -7,6 +7,10 @@ const routes: Routes = [
         loadChildren: './dashboard/dashboard.module#DashboardModule'
     },
     {
+        path: 'todo',
+        loadChildren: './todo/todo.module#TodoModule'
+    },
+    {
         path: '',
         redirectTo: '',
         pathMatch: 'full'

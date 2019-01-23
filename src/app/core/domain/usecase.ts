@@ -1,0 +1,10 @@
+import {Observable, Observer} from 'rxjs';
+import {Injectable} from '@angular/core';
+
+
+@Injectable({
+    providedIn: 'root'
+})
+export abstract class Usecase {
+    abstract execute();
+}
