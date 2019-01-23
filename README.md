@@ -1,6 +1,31 @@
-# Ngrx
+# Angular Cleaner Architecture
+## What is it for ?
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.1.
+
+This is my attempt at implementing Robert C. Martin (Uncle Bob) Clean Architecture guidelines in Angular 7.
+ This project is using Angular's dependancy injection system, Ngrx observable store, Angular Material, Angular FlexLayout
+
+###Featured modules:
+####Auth : 
+- Provides the app with a simple JWT authentication for Strapi.io API backend.
+- Login page and route
+- Login component
+
+####Todo :
+
+This module is structured in 3 main layers : 
+- Presentation : Angular containers and components that can only communicate with a facade (Sandbox)
+- Domain : Business logic and executable Usecase class that can dispatch actions and forward state changes to the presentation layer.
+- Data : Angular services for managing api requests, Ngrx store to maintain application state
+
+##Roadmap
+
+- Make distinct Model classes for each layer with coresponding Mapper classes.
+- Refactor Auth module to take advantage of 3 layer architecture.
+- Make a fully functional Todo list.
+- Try to use Data and Domain layers to make a Mobile app (Ionic, Nativescript etc).
+- Create angular-cli schematics to reduce boilerplate code.
+- Write tests
 
 ## Development server
 
@@ -25,3 +50,5 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.1.
