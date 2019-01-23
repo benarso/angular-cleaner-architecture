@@ -20,13 +20,14 @@ This module is structured in 3 main layers :
 
 ##Roadmap
 
-- Make distinct Model classes for each layer with coresponding Mapper classes.
+- Make distinct Model classes for each layer with corresponding Mapper classes.
 - Refactor Auth module to take advantage of 3 layer architecture.
 - Make a fully functional Todo list.
 - Try to use Data and Domain layers to make a Mobile app (Ionic, Nativescript etc).
 - Create angular-cli schematics to reduce boilerplate code.
-- Write tests
-- A lot more
+- Write tests.
+- Creation of a Layout module to manage layout state.
+- A lot more to come !
 
 ## Development server
 
