@@ -26,6 +26,7 @@ This module is structured in 3 main layers :
 - Try to use Data and Domain layers to make a Mobile app (Ionic, Nativescript etc).
 - Create angular-cli schematics to reduce boilerplate code.
 - Write tests
+- A lot more
 
 ## Development server
 
