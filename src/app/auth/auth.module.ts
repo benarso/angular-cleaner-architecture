@@ -10,6 +10,9 @@ import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from '../auth/components/login/login.component';
 import {AuthGuardService} from './services/guards/auth-guard.service';
+import {AuthService} from './services/auth.service';
+import {ApiAuthService} from './services/api-auth.service';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
   declarations: [LoginPageComponent, LoginComponent],
@@ -21,7 +24,9 @@ import {AuthGuardService} from './services/guards/auth-guard.service';
     MaterialModule,
     ReactiveFormsModule
   ],
-  providers: []
+  providers: [
+      { provide: AuthService, useClass: ApiAuthService, deps: [HttpClient]}
+      ]
 })
 
 export class AuthModule {

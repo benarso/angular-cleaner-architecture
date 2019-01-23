@@ -1,26 +1,26 @@
 import {TodoService} from './todo.service';
-import {Observable, of} from 'rxjs';
 import {Todo} from '../../domain/models/todo';
+import {Observable, of} from 'rxjs';
 import {delay} from 'rxjs/operators';
 
-export class TodoMockService extends TodoService {
+export class ApiTodoService extends TodoService {
     static MOCKTODOS: Todo[] = [
         {
             id: 1,
-            text: 'Buy beer (mock)',
+            text: 'Buy beer (API)',
             done: false,
             created_at: Date.now(),
             updated_at: Date.now()
         },
         {
             id: 1,
-            text: 'Buy sausages (mock',
+            text: 'Buy sausages (API',
             done: false,
             created_at: Date.now(),
             updated_at: Date.now()
         }];
 
     loadTodos(): Observable<Todo[]> {
-        return of(TodoMockService.MOCKTODOS).pipe(delay(1500));
+        return of(ApiTodoService.MOCKTODOS).pipe(delay(1500));
     }
 }

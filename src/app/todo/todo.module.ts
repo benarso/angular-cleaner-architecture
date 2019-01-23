@@ -8,8 +8,7 @@ import {TodoListComponent} from './presentation/containers/todo-list/todo-list.c
 import {TodoItemComponent} from './presentation/components/todo-item/todo-item.component';
 import {TodoRoutingModule} from './todo-routing.module';
 import {TodoService} from './data/api/todo.service';
-import {TodoMockService} from './data/api/todo-mock-service';
-import {TodoApiService} from './data/api/todo-api-service';
+import {ApiTodoService} from './data/api/api-todo-service';
 
 @NgModule({
     declarations: [TodoListComponent, TodoItemComponent],
@@ -20,7 +19,7 @@ import {TodoApiService} from './data/api/todo-api-service';
         EffectsModule.forFeature([TodoEffects])
     ],
     providers: [
-        { provide: TodoService, useClass: TodoApiService}
+        { provide: TodoService, useClass: ApiTodoService}
     ]
 })
 export class TodoModule {

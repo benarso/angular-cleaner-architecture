@@ -13,9 +13,9 @@ import {
 import {Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {catchError, map, mapTo, switchMap, tap, throttleTime} from 'rxjs/operators';
-import {MockAuthService} from '../services/mock-auth.service';
-import { Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
+import {AuthService} from '../services/auth.service';
 
 export const THROTTLE_TIME = 1500;
 
@@ -75,6 +75,6 @@ export class AuthEffects {
         })
     );
 
-    constructor(private authService: MockAuthService, private router: Router, private actions$: Actions) {
+    constructor(private authService: AuthService, private router: Router, private actions$: Actions) {
     }
 }
