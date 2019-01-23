@@ -22,6 +22,7 @@ import {BearerTokenInterceptor} from './auth/services/interceptors/bearer-token-
 import {RedirectUnauthorizedInterceptor} from './auth/services/interceptors/redirect-unauthorized-interceptor';
 import {CoreModule} from './core/core.module';
 import {TodoModule} from './todo/todo.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import {TodoModule} from './todo/todo.module';
         CoreModule,
         HttpClientModule,
         AuthModule,
-        TodoModule
+        TodoModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: BearerTokenInterceptor, multi: true},
