@@ -7,7 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardPageComponent,
-    canActivate: [AuthGuardService] //TODO: guard routes at a lower level
   }
 ];
 
