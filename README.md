@@ -3,7 +3,12 @@
 
 
 This is my attempt at implementing Robert C. Martin (Uncle Bob) Clean Architecture guidelines in Angular 7.
- This project is using Angular's dependancy injection system, Ngrx observable store, Angular Material, Angular FlexLayout
+ This project is using (among others) : 
+ - Angular's dependancy injection system
+ - Ngrx observable store
+ - Angular Material
+ - Angular FlexLayout
+ - Service Worker
 
 ###Featured modules:
 ####Auth : 
@@ -21,6 +26,7 @@ This module is structured in 3 main layers :
 ##Roadmap
 
 - Make distinct Model classes for each layer with corresponding Mapper classes.
+- Implement repository pattern to decouple Domain Usecases from Ngrx store 
 - Refactor Auth module to take advantage of 3 layer architecture.
 - Make a fully functional Todo list.
 - Try to use Data and Domain layers to make a Mobile app (Ionic, Nativescript etc).
