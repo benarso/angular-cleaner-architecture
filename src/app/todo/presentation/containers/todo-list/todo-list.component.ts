@@ -1,19 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {TodoSandbox} from '../../sandbox/todo-sandbox.service';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {TodoPresenter} from '../../presenter/todo-sandbox.service';
+import {TodoViewmodel} from '../../viewmodels/todo-viewmodel';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-todo-list',
     templateUrl: './todo-list.component.html',
-    styleUrls: ['./todo-list.component.css']
+    styleUrls: ['./todo-list.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoListComponent implements OnInit {
 
-    constructor(private sandbox: TodoSandbox) {
+    constructor(private sandbox: TodoPresenter) {
     }
 
-    todos$ = this.sandbox.loadTodos();
+    todos$: Observable<TodoViewmodel[]> = this.sandbox.loadTodos();
 
     ngOnInit() {
+
     }
 }

@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StoreModule} from '@ngrx/store';
-import * as fromTodo from './data/state/reducers/todo.reducer';
+import * as fromTodo from './domain/state/reducers/todo.reducer';
 import {EffectsModule} from '@ngrx/effects';
-import {TodoEffects} from './data/state/effects/todo.effects';
+import {TodoEffects} from './domain/state/effects/todo.effects';
 import {TodoListComponent} from './presentation/containers/todo-list/todo-list.component';
 import {TodoItemComponent} from './presentation/components/todo-item/todo-item.component';
 import {TodoRoutingModule} from './todo-routing.module';

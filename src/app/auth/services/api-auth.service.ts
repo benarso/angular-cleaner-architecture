@@ -12,7 +12,7 @@ export class ApiAuthService extends AuthService {
     }
 
     authenticate(credentials: LoginCredentials): Observable<LoginResponse> {
-        return this.http.post<LoginResponse>('http://arso-strapi.duckdns.org:1337/auth/local',
+        return this.http.post<LoginResponse>('http://localhost:1337/auth/local',
             {identifier: credentials.username, password: credentials.password}
             );
     }

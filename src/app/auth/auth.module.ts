@@ -13,6 +13,7 @@ import {AuthGuardService} from './services/guards/auth-guard.service';
 import {AuthService} from './services/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {MockAuthService} from './services/mock-auth.service';
+import {ApiAuthService} from './services/api-auth.service';
 
 @NgModule({
   declarations: [LoginPageComponent, LoginComponent],
@@ -25,7 +26,7 @@ import {MockAuthService} from './services/mock-auth.service';
     ReactiveFormsModule
   ],
   providers: [
-      { provide: AuthService, useClass: MockAuthService, deps: [HttpClient]}
+      { provide: AuthService, useClass: ApiAuthService, deps: [HttpClient]}
       ]
 })
 

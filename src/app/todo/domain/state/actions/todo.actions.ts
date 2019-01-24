@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
-import {Todo} from '../../../domain/models/todo';
+import {Todo} from '../../models/todo';
 
 export enum TodoActionTypes {
   LoadTodos = '[Todo] Load Todos',
   AddTodo = '[Todo] Add Todo',
   LoadTodoSuccess = '[Todo Api] Load Todos Success',
-  LoadTodoFailure = '[Todo Api] Load Todos Failure'
+  ApiFailure = '[Todo Api] Load Todos Failure'
 }
 
 export class LoadTodos implements Action {

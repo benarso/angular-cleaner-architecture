@@ -8,14 +8,14 @@ export class ApiTodoService extends TodoService {
         {
             id: 1,
             text: 'Buy beer (API)',
-            done: false,
+            completed: false,
             created_at: Date.now(),
             updated_at: Date.now()
         },
         {
             id: 1,
             text: 'Buy sausages (API',
-            done: false,
+            completed: true,
             created_at: Date.now(),
             updated_at: Date.now()
         }];

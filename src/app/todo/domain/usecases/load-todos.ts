@@ -2,9 +2,9 @@ import {Usecase} from '../../../core/domain/usecase';
 import {Todo} from '../models/todo';
 import {Observable, Observer, of} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {LoadTodos} from '../../data/state/actions/todo.actions';
+import {LoadTodos, TodoActions, TodoActionTypes} from '../state/actions/todo.actions';
 import {ObservableUseCase} from '../../../core/domain/observable-use-case';
-import * as fromTodo from '../../data/state/reducers';
+import * as fromTodo from '../state/reducers';
 import {Injectable} from '@angular/core';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class LoadTodosUsecase extends ObservableUseCase<Todo[]> {
     execute(): Observable<Todo[]> {
         // Dispatch Ngrx Action in data layer
         this.store.dispatch(new LoadTodos());
-        // Forward store data to upper layers
+        // Forward store data to presentation layer
         return this.store.select(fromTodo.selectTodos);
     }
 }
