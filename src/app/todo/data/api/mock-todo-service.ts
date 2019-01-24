@@ -8,14 +8,16 @@ export class MockTodoService extends TodoService {
         {
             id: 1,
             text: 'Buy beer (mock)',
-            done: false,
+            completed: false,
+            position: 0,
             created_at: Date.now(),
             updated_at: Date.now()
         },
         {
             id: 1,
             text: 'Buy sausages (mock',
-            done: false,
+            completed: false,
+            position: 1,
             created_at: Date.now(),
             updated_at: Date.now()
         }];

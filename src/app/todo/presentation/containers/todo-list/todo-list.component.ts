@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {TodoPresenter} from '../../presenter/todo-sandbox.service';
+import {TodoPresenter} from '../../presenter/todo-presenter.service';
 import {TodoViewmodel} from '../../viewmodels/todo-viewmodel';
 import {Observable} from 'rxjs';
 

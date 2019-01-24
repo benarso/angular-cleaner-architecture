@@ -9,6 +9,7 @@ export class ApiTodoService extends TodoService {
             id: 1,
             text: 'Buy beer (API)',
             completed: false,
+            position: 0,
             created_at: Date.now(),
             updated_at: Date.now()
         },
@@ -16,6 +17,7 @@ export class ApiTodoService extends TodoService {
             id: 1,
             text: 'Buy sausages (API',
             completed: true,
+            position: 1,
             created_at: Date.now(),
             updated_at: Date.now()
         }];
