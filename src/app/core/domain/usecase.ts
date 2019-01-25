@@ -5,6 +5,6 @@ import {Injectable} from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export abstract class Usecase {
+export abstract class Usecase<T> {
     abstract execute();
 }

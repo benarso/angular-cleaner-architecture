@@ -1,4 +1,8 @@
-<p>
-  <span *ngIf="!todo.isEditing">{{todo.text}}</span>
-  <input *ngIf="todo.isEditing" type="text" value="{{todo.text}}">
-</p>
+<div fxLayout="row" >
+  <mat-form-field >
+    <input matInput id="todo+{{todo.id}}" (focus)="onFocus($event)" (blur)="onBlur($event)" value="{{todo.text}}">
+  </mat-form-field>
+  <mat-checkbox>Done</mat-checkbox>
+</div>
+
+

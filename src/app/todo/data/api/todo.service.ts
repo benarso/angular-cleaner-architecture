@@ -3,4 +3,5 @@ import {Observable, of} from 'rxjs';
 
 export abstract class TodoService {
     abstract loadTodos(): Observable<Todo[]>;
+    abstract addTodo(todo: Todo): Observable<Todo>;
 }

@@ -1,3 +1,12 @@
-<div *ngFor="let todo of todos">
-  <app-todo-item [todo]="todo" (click)="onTodoClicked(todo)"></app-todo-item>
-</div>
+<form class="form">
+    <app-todo-item *ngFor="let todo of todos" [todo]="todo" (startEditing)="onStartEditing($event)" (stopEditing)="onStopEditing($event)"></app-todo-item>
+   <!-- <mat-form-field class="form-field">
+        <input matInput type="text" placeholder="New todo">
+
+    </mat-form-field>-->
+
+</form>
+
+<button mat-button (click)="onAddClicked()">Add</button>
+
+

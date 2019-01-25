@@ -1,7 +1,6 @@
 import {TodoActions, TodoActionTypes} from '../actions/todo.actions';
 import {Todo} from '../../models/todo';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {User} from '../../../../auth/models/user';
 
 export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
@@ -25,12 +24,15 @@ export function reducer(state = initialState, action: TodoActions): State {
                     loaded: false
                 });
         case TodoActionTypes.LoadTodoSuccess:
-            const newState: State = Object.assign({}, state, {
-                todos: action.payload,
+             return adapter.addAll(action.payload, state);
+
+        case TodoActionTypes.AddTodoSuccess:
+            return adapter.addOne(action.payload, state);
+
+        case TodoActionTypes.AddTodo:
+            return Object.assign({}, state, {
                 loading: false,
-                loaded: true
             });
-             return adapter.addAll(action.payload, newState);
         default:
             return state;
     }

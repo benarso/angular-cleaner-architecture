@@ -9,6 +9,7 @@ import {TodoEffects} from './domain/state/effects/todo.effects';
 import {ApiTodoService} from './data/api/api-todo-service';
 import {TodoService} from './data/api/todo.service';
 import * as fromTodo from './domain/state/reducers/todo.reducer';
+import {MockTodoService} from './data/api/mock-todo-service';
 
 @NgModule({
   declarations: [TodoListComponent, TodoItemComponent],
@@ -19,7 +20,7 @@ import * as fromTodo from './domain/state/reducers/todo.reducer';
     EffectsModule.forFeature([TodoEffects])
   ],
   providers: [
-    { provide: TodoService, useClass: ApiTodoService}
+    { provide: TodoService, useClass: MockTodoService}
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })

@@ -10,8 +10,11 @@ import {TodoPresenter} from '../todo-presenter.service';
 })
 export class TodoMapper implements Mapper<Todo, TodoViewmodel> {
     mapToModel(viewModel: TodoViewmodel): Todo {
-        // Lazy mapping of properties... should do manual mapping
-        return viewModel as unknown as Todo;
+        return {
+            text: viewModel.text,
+            completed: viewModel.completed,
+            position: viewModel.position,
+        };
     }
 
     mapToViewmodel(domainModel: Todo): TodoViewmodel {
@@ -19,6 +22,7 @@ export class TodoMapper implements Mapper<Todo, TodoViewmodel> {
         viewmodel.completed = domainModel.completed;
         viewmodel.text = domainModel.text;
         viewmodel.position = domainModel.position;
+        viewmodel.id = domainModel.id;
         return viewmodel;
     }
 }

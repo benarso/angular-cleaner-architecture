@@ -11,6 +11,7 @@ import {metaReducers, reducers} from './reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {AppEffects} from './app.effects';
 import 'nativescript-localstorage'
+import {NativeScriptHttpClientModule} from 'nativescript-angular/http-client';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from 'nativescript-angular/forms';
@@ -28,6 +29,7 @@ import 'nativescript-localstorage'
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([AppEffects]),
     AppRoutingModule,
+      NativeScriptHttpClientModule,
       TodoModule
   ],
   providers: [],

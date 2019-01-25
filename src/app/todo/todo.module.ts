@@ -9,17 +9,22 @@ import {TodoItemComponent} from './presentation/components/todo-item/todo-item.c
 import {TodoRoutingModule} from './todo-routing.module';
 import {TodoService} from './data/api/todo.service';
 import {ApiTodoService} from './data/api/api-todo-service';
+import {AutofocusDirective} from './presentation/directives/InputAutofocus';
+import {MaterialModule} from '../material/material.module';
+import {MockTodoService} from './data/api/mock-todo-service';
+
 
 @NgModule({
-    declarations: [TodoListComponent, TodoItemComponent],
+    declarations: [TodoListComponent, TodoItemComponent, AutofocusDirective],
     imports: [
         CommonModule,
         TodoRoutingModule,
         StoreModule.forFeature('todo', fromTodo.reducer),
-        EffectsModule.forFeature([TodoEffects])
+        EffectsModule.forFeature([TodoEffects]),
+        MaterialModule,
     ],
     providers: [
-        { provide: TodoService, useClass: ApiTodoService}
+        {provide: TodoService, useClass: ApiTodoService}
     ],
     exports: [TodoListComponent]
 })
