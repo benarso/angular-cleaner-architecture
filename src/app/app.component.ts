@@ -28,6 +28,6 @@ export class AppComponent {
 
     constructor(readonly store: Store<any>, messagingService: MessagingService, snackbar: MatSnackBar) {
         store.select(fromAuth.selectAuthenticated).subscribe(authenticated => this.authenticated = authenticated);
-        messagingService.getMessages().subscribe(message => snackbar.open(message.message, '', {duration: 700}));
+        messagingService.getMessages().subscribe(message => snackbar.open(message.message, '', {duration: 2500}));
     }
 }

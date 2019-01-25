@@ -20,7 +20,8 @@ import {ApiTodoService} from './data/api/api-todo-service';
     ],
     providers: [
         { provide: TodoService, useClass: ApiTodoService}
-    ]
+    ],
+    exports: [TodoListComponent]
 })
 export class TodoModule {
 }

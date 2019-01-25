@@ -1,4 +1,4 @@
 <p>
-  <span *ngIf="!todo.isEditing">Text: {{todo.text}} Completed: {{todo.completed}} Editing: {{todo.isEditing}}</span>
+  <span *ngIf="!todo.isEditing">{{todo.text}}</span>
   <input *ngIf="todo.isEditing" type="text" value="{{todo.text}}">
 </p>

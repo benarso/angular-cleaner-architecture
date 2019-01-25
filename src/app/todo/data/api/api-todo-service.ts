@@ -28,7 +28,7 @@ export class ApiTodoService extends TodoService {
             position: 1,
             created_at: Date.now(),
             updated_at: Date.now()
-        },
+        }
         ];
 
     loadTodos(): Observable<Todo[]> {
