@@ -13,5 +13,5 @@ export const reducers = {
 };
 
 export const selectTodoState = createFeatureSelector<fromTodo.State>('todo');
-export const selectTodos = createSelector(selectTodoState, fromTodo.getTodos);
+export const selectAllTodos = createSelector(selectTodoState, fromTodo.getTodos);
 

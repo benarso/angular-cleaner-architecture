@@ -22,6 +22,6 @@ export class LoadTodosUsecase extends ObservableUseCase<Todo[]> {
         this.store.dispatch(new LoadTodos());
 
         // Forward store data to presentation layer
-        return this.store.select(fromTodo.selectTodos);
+        return this.store.select(fromTodo.selectAllTodos);
     }
 }
