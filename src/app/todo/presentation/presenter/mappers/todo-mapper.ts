@@ -15,7 +15,6 @@ export class TodoMapper implements Mapper<Todo, TodoViewmodel> {
     }
 
     mapToViewmodel(domainModel: Todo): TodoViewmodel {
-        // Lazy mapping of properties... should do manual mapping
         const viewmodel: TodoViewmodel = new TodoViewmodel();
         viewmodel.completed = domainModel.completed;
         viewmodel.text = domainModel.text;
