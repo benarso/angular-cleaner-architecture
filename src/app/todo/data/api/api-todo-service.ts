@@ -6,7 +6,7 @@ import {delay} from 'rxjs/operators';
 export class ApiTodoService extends TodoService {
     static MOCKTODOS: Todo[] = [
         {
-            id: 1,
+            id: 0,
             text: 'Buy beer (API)',
             completed: false,
             position: 0,
@@ -16,6 +16,14 @@ export class ApiTodoService extends TodoService {
         {
             id: 1,
             text: 'Buy sausages (API',
+            completed: true,
+            position: 1,
+            created_at: Date.now(),
+            updated_at: Date.now()
+        },
+        {
+            id: 2,
+            text: 'Buy life',
             completed: true,
             position: 1,
             created_at: Date.now(),

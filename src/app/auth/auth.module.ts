@@ -26,7 +26,7 @@ import {ApiAuthService} from './services/api-auth.service';
     ReactiveFormsModule
   ],
   providers: [
-      { provide: AuthService, useClass: ApiAuthService, deps: [HttpClient]}
+      { provide: AuthService, useClass: MockAuthService, deps: [HttpClient]}
       ]
 })
 

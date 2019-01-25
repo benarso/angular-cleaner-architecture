@@ -1,0 +1,13 @@
+<StackLayout>
+  <Label *ngFor="let todo of todos" text="{{todo.text}}" textWrap="true"></Label>
+</StackLayout>
+
+<!--
+Original Web template:
+
+TODO List
+<div *ngFor="let todo of todos">
+  <app-todo-item [todo]="todo" (click)="onTodoClicked(todo)"></app-todo-item>
+</div>
+
+-->

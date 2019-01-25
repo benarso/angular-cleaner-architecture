@@ -17,8 +17,10 @@ export class LoadTodosUsecase extends ObservableUseCase<Todo[]> {
     }
 
     execute(): Observable<Todo[]> {
+
         // Dispatch Ngrx Action in data layer
         this.store.dispatch(new LoadTodos());
+
         // Forward store data to presentation layer
         return this.store.select(fromTodo.selectTodos);
     }

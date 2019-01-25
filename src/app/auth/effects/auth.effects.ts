@@ -63,7 +63,7 @@ export class AuthEffects {
     dashboardRedirect: Observable<any> = this.actions$.pipe(
         ofType<DashboardRedirect>(LoginActionTypes.DashboardRedirect),
         tap(action => {
-            this.router.navigateByUrl('dashboard');
+            this.router.navigateByUrl('todo');
         })
     );
 
