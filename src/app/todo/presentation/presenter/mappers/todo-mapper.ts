@@ -19,6 +19,6 @@ export class TodoMapper implements Mapper<Todo, TodoViewmodel> {
         viewmodel.completed = domainModel.completed;
         viewmodel.text = domainModel.text;
         viewmodel.position = domainModel.position;
-        return domainModel as unknown as TodoViewmodel;
+        return viewmodel;
     }
 }

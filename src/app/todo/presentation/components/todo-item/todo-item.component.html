@@ -1,3 +1,4 @@
-<p (click)="toggleEditing()">
-  Text: {{todo.text}} Completed: {{todo.completed}} Editing: {{todo.isEditing}}
+<p>
+  <span *ngIf="!todo.isEditing">Text: {{todo.text}} Completed: {{todo.completed}} Editing: {{todo.isEditing}}</span>
+  <input *ngIf="todo.isEditing" type="text" value="{{todo.text}}">
 </p>

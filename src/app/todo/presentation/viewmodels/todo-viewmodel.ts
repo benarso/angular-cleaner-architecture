@@ -5,6 +5,6 @@ export class TodoViewmodel extends ViewModel {
     text: string;
     completed: boolean;
     position: number;
-    isEditing: boolean;
+    isEditing = false;
 }
 
