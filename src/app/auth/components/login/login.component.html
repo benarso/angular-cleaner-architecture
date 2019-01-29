@@ -1,5 +1,5 @@
 
-  <mat-card class="login">
+  <mat-card>
     <mat-card-title>Login</mat-card-title>
     <form *ngIf="!loading"  [formGroup]="loginForm" (ngSubmit)="authenticate()">
       <mat-card-content>
@@ -18,6 +18,8 @@
     </form>
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
   </mat-card>
+
+
 
 
 

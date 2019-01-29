@@ -14,6 +14,7 @@ import {AuthService} from './services/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {MockAuthService} from './services/mock-auth.service';
 import {ApiAuthService} from './services/api-auth.service';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [LoginPageComponent, LoginComponent],
@@ -23,8 +24,10 @@ import {ApiAuthService} from './services/api-auth.service';
     StoreModule.forFeature('auth', fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects]),
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
+  exports: [LoginPageComponent],
   providers: [
       { provide: AuthService, useClass: MockAuthService, deps: [HttpClient]}
       ]

@@ -21,7 +21,7 @@ export class TodoEffects {
                     return new LoadTodoSuccess(todos);
                 }),
                 catchError((error: HttpErrorResponse) => {
-                    return of(new LoginFailed(error.message));
+                    return of(new ApiFailure(error));
                 })
             );
         })

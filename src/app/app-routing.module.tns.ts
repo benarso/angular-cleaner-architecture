@@ -7,7 +7,7 @@ import {TodoListComponent} from './todo/presentation/containers/todo-list/todo-l
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: '/todo',
+        redirectTo: 'todo',
         pathMatch: 'full',
     },
     {

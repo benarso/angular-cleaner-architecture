@@ -30,7 +30,7 @@ export class ApiTodoService extends TodoService {
         ];
 
 
-    readonly BASEURL = 'http://localhost:1337/todos/';
+    readonly BASEURL = 'http://192.168.33.10:1337/todos';
     constructor(private http: HttpClient) {
         super();
     }

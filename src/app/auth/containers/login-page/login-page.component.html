@@ -1,5 +1,11 @@
-<div fxLayout="column" >
-<app-login [loading]="loading$ | async" (login)="authenticate($event)"></app-login>
-</div>
+<!--<app-login [loading]="loading$ | async" (login)="authenticate($event)"></app-login>-->
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="row-height" >
+        <app-login [loading]="loading$ | async" (login)="authenticate($event)"></app-login>
+    </div>
+
+
+
+
 
 

@@ -20,7 +20,7 @@ import {MockTodoService} from './data/api/mock-todo-service';
     EffectsModule.forFeature([TodoEffects])
   ],
   providers: [
-    { provide: TodoService, useClass: MockTodoService}
+    { provide: TodoService, useClass: ApiTodoService}
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })

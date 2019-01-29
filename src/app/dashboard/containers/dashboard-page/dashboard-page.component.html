@@ -1,12 +1,15 @@
-<mat-card>
-  <mat-card-title>Dashboard</mat-card-title>
+<div fxLayout="row wrap" fxLayoutAlign="start center">
+  <mat-card  >
+    <mat-card-title>Dashboard</mat-card-title>
     <mat-card-content>
       Welcome to dashboard : {{ user.username }}
     </mat-card-content>
-</mat-card>
-<mat-card>
-  <mat-card-title>Todolist</mat-card-title>
-  <mat-card-content>
-    <app-todo-list></app-todo-list>
-  </mat-card-content>
-</mat-card>
+  </mat-card>
+  <mat-card  >
+    <mat-card-title>Todolist</mat-card-title>
+    <mat-card-content>
+      <app-todo-list></app-todo-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+

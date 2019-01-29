@@ -1,5 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-sidenav-container>
+
+<!--<mat-sidenav-container>
     <mat-sidenav #sidenav role="navigation">
         <mat-nav-list>
             <a mat-list-item>
@@ -61,11 +62,62 @@
                 </ul>
             </div>
         </mat-toolbar>
-        <main>
-            <router-outlet></router-outlet>
+        <main >
+
         </main>
     </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container>-->
+<div *ngIf="!authenticated;then login else navigation"></div>
+<ng-template #login>
+    <app-login-page></app-login-page>
+</ng-template>
+<ng-template #navigation>
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+                     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                     [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                     [opened]="!(isHandset$ | async)">
+            <mat-toolbar>Menu</mat-toolbar>
+            <mat-nav-list>
+                <a routerLink="/dashboard" mat-list-item routerLinkActive="active">Dashboard</a>
+                <a routerLink="/todo" mat-list-item routerLinkActive="active">Todo</a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" color="primary">
+
+
+                <button
+                        type="button"
+                        aria-label="Toggle sidenav"
+                        mat-icon-button
+                        (click)="drawer.toggle()"
+                        *ngIf="isHandset$ | async">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+
+
+                <span >FlexPlayground</span>
+                <button
+                        type="button"
+                        aria-label="Logout"
+                        mat-icon-button
+                        (click)="logout()"
+                        *ngIf="authenticated">
+                    <mat-icon aria-label="Side nav toggle icon">logout</mat-icon>
+                </button>
+
+
+            </mat-toolbar>
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</ng-template>
+
+
+
 
 
 

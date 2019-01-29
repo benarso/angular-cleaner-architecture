@@ -4,6 +4,7 @@ import {TodoViewmodel} from '../../viewmodels/todo-viewmodel';
 import {Observable} from 'rxjs';
 import {filter, map, switchMap} from 'rxjs/operators';
 import {Todo} from '../../../domain/models/todo';
+import {MessagingService} from '../../../../core/domain/messaging-service';
 
 @Component({
     selector: 'app-todo-list',
@@ -12,7 +13,10 @@ import {Todo} from '../../../domain/models/todo';
 })
 export class TodoListComponent implements OnInit {
 
-    constructor(private presenter: TodoPresenter) {
+    constructor(private presenter: TodoPresenter, private messaging: MessagingService) {
+        messaging.getMessages().subscribe(m => {
+            console.log(m.message);
+        });
     }
 
     todos$ = this.presenter.loadTodos();
