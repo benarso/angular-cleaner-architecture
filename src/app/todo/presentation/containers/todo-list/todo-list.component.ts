@@ -13,10 +13,7 @@ import {MessagingService} from '../../../../core/domain/messaging-service';
 })
 export class TodoListComponent implements OnInit {
 
-    constructor(private presenter: TodoPresenter, private messaging: MessagingService) {
-        messaging.getMessages().subscribe(m => {
-            console.log(m.message);
-        });
+    constructor(private presenter: TodoPresenter) {
     }
 
     todos$ = this.presenter.loadTodos();
