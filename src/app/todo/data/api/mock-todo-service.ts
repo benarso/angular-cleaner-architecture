@@ -42,4 +42,24 @@ export class MockTodoService extends TodoService {
 
         });
     }
+
+    removeTodo(todo: Todo) {
+        return of({
+            id: '3',
+            text: 'Buy a life (mock)',
+            completed: false,
+            position: 1,
+
+        });
+    }
+
+    updateTodo(todo: Todo) {
+        return of({
+            id: '3',
+            text: 'Buy a life (mock)',
+            completed: false,
+            position: 1,
+
+        });
+    }
 }

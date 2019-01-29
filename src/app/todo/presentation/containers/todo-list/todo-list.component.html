@@ -1,11 +1,26 @@
-<form class="form">
-    <app-todo-item *ngFor="let todo of todos" [todo]="todo" (startEditing)="onStartEditing($event)" (stopEditing)="onStopEditing($event)" (remove)="onRemove($event)"></app-todo-item>
-   <!-- <mat-form-field class="form-field">
-        <input matInput type="text" placeholder="New todo">
+<h2>Todo</h2>
+<app-todo-item *ngFor="let todo of incompleteTodos"
+               [todo]="todo"
+               (startEditing)="onStartEditing(todo)"
+               (stopEditing)="onStopEditing(todo)"
+               (remove)="onRemove(todo)"
+               (toggle)="onToggle(todo)">
+</app-todo-item>
+<mat-divider></mat-divider>
+<h2>Done</h2>
+<app-todo-item *ngFor="let todo of completedTodos"
+               [todo]="todo"
+               (startEditing)="onStartEditing(todo)"
+               (stopEditing)="onStopEditing(todo)"
+               (remove)="onRemove(todo)"
+               (toggle)="onToggle(todo)">
 
-    </mat-form-field>-->
+</app-todo-item>
+<!-- <mat-form-field class="form-field">
+     <input matInput type="text" placeholder="New todo">
 
-</form>
+ </mat-form-field>-->
+
 
 <button mat-button (click)="onAddClicked()">Add</button>
 

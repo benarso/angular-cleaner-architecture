@@ -47,4 +47,8 @@ export class ApiTodoService extends TodoService {
         const url = `${this.BASEURL}/${todo.id}`;
         return this.http.delete(url);
     }
+
+    updateTodo(todo: Todo) {
+        return this.http.put(`${this.BASEURL}/${todo.id}`, todo).pipe();
+    }
 }

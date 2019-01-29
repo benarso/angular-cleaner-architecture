@@ -24,30 +24,48 @@ export class TodoListComponent implements OnInit {
     }
 
     onTodoClicked(clickedTodo: TodoViewmodel) {
+        console.warn('onTodoClicked');
         clickedTodo.isEditing = !clickedTodo.isEditing;
     }
 
     onStartEditing(todo: TodoViewmodel) {
+        console.warn('onStartEditing');
         todo.isEditing = true;
     }
 
     onStopEditing(todo: TodoViewmodel) {
+        console.warn('onStopEditing');
         todo.isEditing = false;
     }
+
     private getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
-    onAddClicked() {
 
+    onAddClicked() {
+        console.warn('onAddclicked');
         this.presenter.addTodo({
             text: 'New Todo' + this.getRandomInt(33),
             position: 1,
             isEditing: false,
-            completed: true
+            completed: false
         });
     }
 
     onRemove(todo: TodoViewmodel) {
+        console.warn('onRemove');
         this.presenter.removeTodo(todo);
+    }
+
+    onToggle(todo: TodoViewmodel) {
+        return this.presenter.toggleTodo(todo);
+    }
+
+    get completedTodos() {
+        return this.todos.filter(todo => todo.completed);
+    }
+
+    get incompleteTodos() {
+        return this.todos.filter(todo => !todo.completed);
     }
 }

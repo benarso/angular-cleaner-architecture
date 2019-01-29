@@ -11,6 +11,7 @@ import {TodoModule} from '../../todo.module';
 import {TodoListComponent} from '../containers/todo-list/todo-list.component';
 import {AddTodoUsecase} from '../../domain/usecases/add-todo';
 import {RemoveTodoUsecase} from '../../domain/usecases/remove-todo';
+import {ToggleTodoUsecase} from '../../domain/usecases/toggle-todo';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,8 @@ export class TodoPresenter extends Presenter {
         private loadTodoUsecase: LoadTodosUsecase,
         private addTodoUsecase: AddTodoUsecase,
         private removeTodoUsecase: RemoveTodoUsecase,
-        private todoMapper: TodoMapper) {
+        private todoMapper: TodoMapper,
+        private toggleTodoUsecase: ToggleTodoUsecase) {
         super();
     }
 
@@ -44,8 +46,8 @@ export class TodoPresenter extends Presenter {
 
     }
 
-    updateTodo(todo: TodoViewmodel) {
-
+    toggleTodo(todo: TodoViewmodel) {
+        this.toggleTodoUsecase.execute(this.todoMapper.mapToModel(todo));
     }
 }
 

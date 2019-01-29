@@ -2,6 +2,7 @@ import {Action} from '@ngrx/store';
 import {Todo} from '../../models/todo';
 import {HttpErrorResponse} from '@angular/common/http';
 import {State} from '../reducers/todo.reducer';
+import {Update} from '@ngrx/entity';
 
 export enum TodoActionTypes {
     LoadTodos = '[Todo] Load Todos',
@@ -11,7 +12,9 @@ export enum TodoActionTypes {
     ApiFailure = '[Todo Api] Load Todos Failure',
     RemoveTodo = '[TodoListComponent] Remove Todo',
     RemoveTodoSuccess = '[TodoApi] Remove Todo Success',
-    UpdateTodoState = '[Storage] Update Todo State'
+    ToggleTodo = '{TodoListComponent] Toggle Todo',
+    ToggleTodoSuccess = '[Todo Api] Todo Toggle Success',
+    UpdateTodoState = '[Storage] Update Todo State',
 }
 
 export class LoadTodos implements Action {
@@ -60,6 +63,16 @@ export class RemoveTodoSuccess implements Action {
     }
 }
 
+export class ToggleTodo implements Action {
+    readonly type = TodoActionTypes.ToggleTodo;
+    constructor(readonly payload:  Todo) {}
+}
+
+export class ToggleTodoSuccess implements Action {
+    readonly type = TodoActionTypes.ToggleTodoSuccess;
+    constructor(readonly payload: Update<Todo>) {}
+}
+
 export class UpdateTodoState implements Action {
     readonly type = TodoActionTypes.UpdateTodoState;
 
@@ -75,4 +88,6 @@ export type TodoActions =
     | ApiFailure
     | RemoveTodo
     | RemoveTodoSuccess
-    | UpdateTodoState;
+    | UpdateTodoState
+    | ToggleTodo
+    | ToggleTodoSuccess;

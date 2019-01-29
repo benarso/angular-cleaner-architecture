@@ -13,12 +13,14 @@ import {AutofocusDirective} from './presentation/directives/InputAutofocus';
 import {MaterialModule} from '../material/material.module';
 import {MockTodoService} from './data/api/mock-todo-service';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
     declarations: [TodoListComponent, TodoItemComponent, AutofocusDirective],
     imports: [
         CommonModule,
+        FormsModule,
         TodoRoutingModule,
         StoreModule.forFeature('todo', fromTodo.reducer),
         EffectsModule.forFeature([TodoEffects]),

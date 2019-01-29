@@ -4,6 +4,7 @@ import {TodoViewmodel} from '../../viewmodels/todo-viewmodel';
 import {withIdentifier} from 'codelyzer/util/astQuery';
 import {Editable} from '../../../../core/presentation/concerns/editable';
 import {LoginCredentials} from '../../../../auth/models/login-credentials';
+import {MatCheckboxChange} from '@angular/material';
 
 @Component({
     selector: 'app-todo-item',
@@ -17,6 +18,7 @@ export class TodoItemComponent implements OnInit {
     @Output() startEditing = new EventEmitter();
     @Output() stopEditing = new EventEmitter();
     @Output() remove = new EventEmitter();
+    @Output() toggle = new EventEmitter();
 
     constructor(private renderer: Renderer2) {
     }
@@ -24,15 +26,19 @@ export class TodoItemComponent implements OnInit {
     ngOnInit() {
     }
 
-    onFocus(event: MouseEvent) {
-        this.startEditing.emit(this.todo);
+    onFocus() {
+        this.startEditing.emit();
     }
 
     onBlur() {
-        this.stopEditing.emit(this.todo);
+        this.stopEditing.emit();
     }
 
     onRemove() {
-        this.remove.emit(this.todo);
+        this.remove.emit();
+    }
+
+    onCheckboxChanged(event: MatCheckboxChange) {
+       this.toggle.emit();
     }
 }

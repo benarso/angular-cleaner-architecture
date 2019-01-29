@@ -6,9 +6,9 @@ import {
     LoadTodoSuccess,
     RemoveTodo,
     RemoveTodoSuccess,
-    TodoActionTypes, UpdateTodoState
+    TodoActionTypes, ToggleTodo, UpdateTodoState, ToggleTodoSuccess
 } from '../actions/todo.actions';
-import {catchError, filter, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, filter, map, mapTo, switchMap, tap} from 'rxjs/operators';
 import {fromEvent, of} from 'rxjs';
 import {TodoService} from '../../../data/api/todo.service';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -68,15 +68,32 @@ export class TodoEffects {
             console.warn(action.payload.message);
         })
     );
-
+/*
     @Effect()
     onChange$ = fromEvent<StorageEvent>(window, 'storage').pipe(
         filter(evt => evt.key === 'todo'),
         filter(evt => evt.newValue !== null),
+        tap( evt => this.messagingService.post({message: JSON.stringify(evt.newValue)})),
         map(evt => {
             return new UpdateTodoState(JSON.parse(evt.newValue));
         })
+    );*/
+
+    @Effect()
+    updateTodo$ = this.actions$.pipe(
+        ofType<ToggleTodo>(TodoActionTypes.ToggleTodo),
+        switchMap(action => {
+            action.payload.completed = !action.payload.completed;
+            return this.todoService.updateTodo(action.payload).pipe(
+                map((todo) => {
+                        return new ToggleTodoSuccess({id: action.payload.id, changes: todo});
+                    }
+                ),
+                catchError((e: HttpErrorResponse) => of(new ApiFailure(e)))
+            );
+        }),
     );
+
 
 
     constructor(private actions$: Actions, private todoService: TodoService, private messagingService: MessagingService) {
