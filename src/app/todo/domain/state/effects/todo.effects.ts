@@ -1,21 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {
-    AddTodo,
     AddTodoSuccess,
     ApiFailure,
     LoadTodoSuccess,
     RemoveTodo,
     RemoveTodoSuccess,
-    TodoActionTypes
+    TodoActionTypes, UpdateTodoState
 } from '../actions/todo.actions';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {catchError, filter, map, switchMap, tap} from 'rxjs/operators';
+import {fromEvent, of} from 'rxjs';
 import {TodoService} from '../../../data/api/todo.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import {LoginFailed} from '../../../../auth/actions/auth.actions';
 import {MessagingService} from '../../../../core/domain/messaging-service';
-import {Todo} from '../../models/todo';
 
 @Injectable()
 export class TodoEffects {
@@ -40,7 +37,7 @@ export class TodoEffects {
         ofType<AddTodoSuccess>(TodoActionTypes.AddTodo),
         switchMap(action => {
             return this.todoService.addTodo(action.payload).pipe(
-                map( (todo) => {
+                map((todo) => {
                         return new AddTodoSuccess(todo);
                     }
                 ),
@@ -54,7 +51,7 @@ export class TodoEffects {
         ofType<RemoveTodo>(TodoActionTypes.RemoveTodo),
         switchMap(action => {
             return this.todoService.removeTodo(action.payload).pipe(
-                map( (todo) => {
+                map((todo) => {
                         return new RemoveTodoSuccess(action.payload);
                     }
                 ),
@@ -71,6 +68,16 @@ export class TodoEffects {
             console.warn(action.payload.message);
         })
     );
+
+    @Effect()
+    onChange$ = fromEvent<StorageEvent>(window, 'storage').pipe(
+        filter(evt => evt.key === 'todo'),
+        filter(evt => evt.newValue !== null),
+        map(evt => {
+            return new UpdateTodoState(JSON.parse(evt.newValue));
+        })
+    );
+
 
     constructor(private actions$: Actions, private todoService: TodoService, private messagingService: MessagingService) {
     }

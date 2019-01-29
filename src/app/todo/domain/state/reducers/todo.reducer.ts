@@ -14,17 +14,15 @@ export const initialState: State = adapter.getInitialState({
     loaded: true
 });
 
-
-
 export function reducer(state = initialState, action: TodoActions): State {
     switch (action.type) {
         case TodoActionTypes.LoadTodos:
             return Object.assign({}, state, {
-                    loading: true,
-                    loaded: false
-                });
+                loading: true,
+                loaded: false
+            });
         case TodoActionTypes.LoadTodoSuccess:
-             return adapter.addAll(action.payload, state);
+            return adapter.addAll(action.payload, state);
 
         case TodoActionTypes.AddTodoSuccess:
             return adapter.addOne(action.payload, state);
@@ -35,11 +33,16 @@ export function reducer(state = initialState, action: TodoActions): State {
             });
 
         case TodoActionTypes.RemoveTodoSuccess:
-            return adapter.removeOne(action.payload.id, state)
+            return adapter.removeOne(action.payload.id, state);
+
+        case TodoActionTypes.UpdateTodoState:
+            return Object.assign({}, state, action.payload);
+
         default:
             return state;
     }
 }
+
 const {
     selectIds,
     selectEntities,

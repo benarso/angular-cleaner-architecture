@@ -1,8 +1,7 @@
-import {Usecase} from '../../../core/domain/usecase';
 import {Todo} from '../models/todo';
-import {Observable, Observer, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {LoadTodos, TodoActions, TodoActionTypes} from '../state/actions/todo.actions';
+import {LoadTodos} from '../state/actions/todo.actions';
 import {ObservableUseCase} from '../../../core/domain/observable-use-case';
 import * as fromTodo from '../state/reducers';
 import {Injectable} from '@angular/core';
