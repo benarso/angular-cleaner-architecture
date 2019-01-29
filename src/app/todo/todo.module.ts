@@ -12,6 +12,7 @@ import {ApiTodoService} from './data/api/api-todo-service';
 import {AutofocusDirective} from './presentation/directives/InputAutofocus';
 import {MaterialModule} from '../material/material.module';
 import {MockTodoService} from './data/api/mock-todo-service';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {MockTodoService} from './data/api/mock-todo-service';
         StoreModule.forFeature('todo', fromTodo.reducer),
         EffectsModule.forFeature([TodoEffects]),
         MaterialModule,
+        FlexLayoutModule
     ],
     providers: [
         {provide: TodoService, useClass: ApiTodoService}

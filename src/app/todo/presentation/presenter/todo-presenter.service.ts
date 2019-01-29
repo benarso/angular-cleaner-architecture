@@ -10,6 +10,7 @@ import {TodoMapper} from './mappers/todo-mapper';
 import {TodoModule} from '../../todo.module';
 import {TodoListComponent} from '../containers/todo-list/todo-list.component';
 import {AddTodoUsecase} from '../../domain/usecases/add-todo';
+import {RemoveTodoUsecase} from '../../domain/usecases/remove-todo';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,7 @@ export class TodoPresenter extends Presenter {
     constructor(
         private loadTodoUsecase: LoadTodosUsecase,
         private addTodoUsecase: AddTodoUsecase,
+        private removeTodoUsecase: RemoveTodoUsecase,
         private todoMapper: TodoMapper) {
         super();
     }
@@ -35,7 +37,7 @@ export class TodoPresenter extends Presenter {
     }
 
     removeTodo(todo: TodoViewmodel) {
-
+        this.removeTodoUsecase.execute(this.todoMapper.mapToModel(todo));
     }
 
     updateManyTodos(todos: TodoViewmodel[]) {

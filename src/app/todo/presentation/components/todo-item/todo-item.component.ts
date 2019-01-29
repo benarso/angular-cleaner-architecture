@@ -16,6 +16,7 @@ export class TodoItemComponent implements OnInit {
     @Input() todo: TodoViewmodel;
     @Output() startEditing = new EventEmitter();
     @Output() stopEditing = new EventEmitter();
+    @Output() remove = new EventEmitter();
 
     constructor(private renderer: Renderer2) {
     }
@@ -31,4 +32,7 @@ export class TodoItemComponent implements OnInit {
         this.stopEditing.emit(this.todo);
     }
 
+    onRemove() {
+        this.remove.emit(this.todo);
+    }
 }

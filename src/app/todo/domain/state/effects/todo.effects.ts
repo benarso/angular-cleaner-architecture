@@ -1,6 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {AddTodo, AddTodoSuccess, ApiFailure, LoadTodoSuccess, TodoActionTypes} from '../actions/todo.actions';
+import {
+    AddTodo,
+    AddTodoSuccess,
+    ApiFailure,
+    LoadTodoSuccess,
+    RemoveTodo,
+    RemoveTodoSuccess,
+    TodoActionTypes
+} from '../actions/todo.actions';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {TodoService} from '../../../data/api/todo.service';
@@ -34,6 +42,20 @@ export class TodoEffects {
             return this.todoService.addTodo(action.payload).pipe(
                 map( (todo) => {
                         return new AddTodoSuccess(todo);
+                    }
+                ),
+                catchError((e: HttpErrorResponse) => of(new ApiFailure(e)))
+            );
+        }),
+    );
+
+    @Effect()
+    removeTodo$ = this.actions$.pipe(
+        ofType<RemoveTodo>(TodoActionTypes.RemoveTodo),
+        switchMap(action => {
+            return this.todoService.removeTodo(action.payload).pipe(
+                map( (todo) => {
+                        return new RemoveTodoSuccess(action.payload);
                     }
                 ),
                 catchError((e: HttpErrorResponse) => of(new ApiFailure(e)))

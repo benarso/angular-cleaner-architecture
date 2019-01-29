@@ -1,5 +1,31 @@
 
 
 .todo-item {
-  width: 100%
+
+}
+
+.wrapper-test{
+ padding:4px;
+
+}
+
+.wrapper-test .remove{
+  visibility:hidden;
+
+  z-index: 2;
+}
+
+.wrapper-test:hover .remove{
+  visibility:visible;
+}
+
+.wrapper-test .handle {
+  visibility:hidden;
+  position:relative;
+}
+.wrapper-test:hover .handle{
+  visibility:visible;
+}
+.wrapper-test:hover{
+
 }

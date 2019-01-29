@@ -42,4 +42,9 @@ export class ApiTodoService extends TodoService {
     addTodo(todo: Todo) {
         return this.http.post<Todo>(this.BASEURL, todo);
     }
+
+    removeTodo(todo: Todo) {
+        const url = `${this.BASEURL}/${todo.id}`;
+        return this.http.delete(url);
+    }
 }

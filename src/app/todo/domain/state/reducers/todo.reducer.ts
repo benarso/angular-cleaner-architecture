@@ -33,6 +33,9 @@ export function reducer(state = initialState, action: TodoActions): State {
             return Object.assign({}, state, {
                 loading: false,
             });
+
+        case TodoActionTypes.RemoveTodoSuccess:
+            return adapter.removeOne(action.payload.id, state)
         default:
             return state;
     }

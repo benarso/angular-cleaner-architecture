@@ -14,6 +14,7 @@ export class TodoMapper implements Mapper<Todo, TodoViewmodel> {
             text: viewModel.text,
             completed: viewModel.completed,
             position: viewModel.position,
+            id: viewModel.id
         };
     }
 

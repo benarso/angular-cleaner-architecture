@@ -1,5 +1,5 @@
 <form class="form">
-    <app-todo-item *ngFor="let todo of todos" [todo]="todo" (startEditing)="onStartEditing($event)" (stopEditing)="onStopEditing($event)"></app-todo-item>
+    <app-todo-item *ngFor="let todo of todos" [todo]="todo" (startEditing)="onStartEditing($event)" (stopEditing)="onStopEditing($event)" (remove)="onRemove($event)"></app-todo-item>
    <!-- <mat-form-field class="form-field">
         <input matInput type="text" placeholder="New todo">
 

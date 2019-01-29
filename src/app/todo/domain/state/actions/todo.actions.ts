@@ -8,7 +8,9 @@ export enum TodoActionTypes {
   AddTodo = '[Todo] Add Todo',
   AddTodoSuccess = '[Todo] Add Todo Success',
   LoadTodoSuccess = '[Todo Api] Load Todos Success',
-  ApiFailure = '[Todo Api] Load Todos Failure'
+  ApiFailure = '[Todo Api] Load Todos Failure',
+  RemoveTodo = '[TodoListComponent] Remove Todo',
+  RemoveTodoSuccess = '[TodoApi] Remove Todo Success'
 }
 
 export class LoadTodos implements Action {
@@ -40,4 +42,16 @@ export class ApiFailure implements Action {
   }
 }
 
-export type TodoActions = LoadTodos | LoadTodoSuccess | AddTodo | AddTodoSuccess | ApiFailure;
+export class RemoveTodo implements Action {
+  readonly type = TodoActionTypes.RemoveTodo;
+  constructor(readonly payload: Todo) {
+  }
+}
+
+export class RemoveTodoSuccess implements Action {
+  readonly type = TodoActionTypes.RemoveTodoSuccess;
+  constructor(readonly payload: Todo) {
+  }
+}
+
+export type TodoActions = LoadTodos | LoadTodoSuccess | AddTodo | AddTodoSuccess | ApiFailure | RemoveTodo | RemoveTodoSuccess;

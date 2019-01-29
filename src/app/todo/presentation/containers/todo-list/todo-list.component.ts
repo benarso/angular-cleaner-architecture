@@ -49,4 +49,8 @@ export class TodoListComponent implements OnInit {
             completed: true
         });
     }
+
+    onRemove(todo: TodoViewmodel) {
+        this.presenter.removeTodo(todo);
+    }
 }
