@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {del} from 'selenium-webdriver/http';
 @Injectable({providedIn: 'root'})
 export class ApiTodoService extends TodoService {
 
@@ -48,7 +49,9 @@ export class ApiTodoService extends TodoService {
         return this.http.delete(url);
     }
 
-    updateTodo(todo: Todo) {
-        return this.http.put(`${this.BASEURL}/${todo.id}`, todo).pipe();
+    updateTodo(id: string, changes: Todo) {
+        return this.http.put(`${this.BASEURL}/${id}`, changes).pipe(
+            delay(500)
+        );
     }
 }

@@ -6,13 +6,14 @@ import {
     LoadTodoSuccess,
     RemoveTodo,
     RemoveTodoSuccess,
-    TodoActionTypes, ToggleTodo, UpdateTodoState, ToggleTodoSuccess
+    TodoActionTypes, ToggleTodo, UpdateTodoState, ToggleTodoSuccess, LoadTodos
 } from '../actions/todo.actions';
 import {catchError, filter, map, mapTo, switchMap, tap} from 'rxjs/operators';
 import {fromEvent, of} from 'rxjs';
 import {TodoService} from '../../../data/api/todo.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MessagingService} from '../../../../core/domain/messaging-service';
+import {Todo} from '../../models/todo';
 
 @Injectable()
 export class TodoEffects {
@@ -83,10 +84,10 @@ export class TodoEffects {
     updateTodo$ = this.actions$.pipe(
         ofType<ToggleTodo>(TodoActionTypes.ToggleTodo),
         switchMap(action => {
-            action.payload.completed = !action.payload.completed;
-            return this.todoService.updateTodo(action.payload).pipe(
-                map((todo) => {
-                        return new ToggleTodoSuccess({id: action.payload.id, changes: todo});
+            console.warn(action.payload.changes.completed)
+            return this.todoService.updateTodo(action.payload.id, action.payload.changes).pipe(
+                map((todo: Todo) => {
+                        return new ToggleTodoSuccess(todo);
                     }
                 ),
                 catchError((e: HttpErrorResponse) => of(new ApiFailure(e)))

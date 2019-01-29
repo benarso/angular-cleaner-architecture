@@ -65,12 +65,12 @@ export class RemoveTodoSuccess implements Action {
 
 export class ToggleTodo implements Action {
     readonly type = TodoActionTypes.ToggleTodo;
-    constructor(readonly payload:  Todo) {}
+    constructor(readonly payload:  Update<Todo>) {}
 }
 
 export class ToggleTodoSuccess implements Action {
     readonly type = TodoActionTypes.ToggleTodoSuccess;
-    constructor(readonly payload: Update<Todo>) {}
+    constructor(readonly payload: Todo) {}
 }
 
 export class UpdateTodoState implements Action {

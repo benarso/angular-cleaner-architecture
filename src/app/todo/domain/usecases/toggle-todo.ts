@@ -17,7 +17,12 @@ export class ToggleTodoUsecase extends SingleUsecase<Todo> {
     }
 
     execute(payload: Todo) {
-        this.store.dispatch(new ToggleTodo(payload));
+        this.store.dispatch(new ToggleTodo({
+            id: payload.id,
+            changes: {
+                completed: !payload.completed
+            }
+        }));
     }
 
 
