@@ -20,17 +20,19 @@ export class TodoItemComponent implements OnInit {
     @Output() remove = new EventEmitter();
     @Output() toggle = new EventEmitter();
 
+
+    //todo: add formgroup isdirty check before firing events
     constructor(private renderer: Renderer2) {
     }
 
     ngOnInit() {
     }
 
-    onFocus() {
+    onInputFocus() {
         this.startEditing.emit();
     }
 
-    onBlur() {
+    onInputBlur() {
         this.stopEditing.emit();
     }
 

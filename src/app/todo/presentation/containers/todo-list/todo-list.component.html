@@ -6,7 +6,25 @@
                (remove)="onRemove(todo)"
                (toggle)="onToggle(todo)">
 </app-todo-item>
+
+<!--<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+
+</div>-->
+
+<div
+     gdAreas=". icon input . ."
+     gdColumns="auto auto 1fr auto auto"
+     gdRows="1fr"
+     gdAlignColumns="end center"
+     gdGap="16px"
+     gdGap.xs="4px">
+    <mat-icon gdArea="icon" gdColumn="2">add</mat-icon>
+    <mat-form-field gdArea="input" gdColumn="3">
+        <input matInput type="text" placeholder="New todo">
+    </mat-form-field>
+</div>
 <mat-divider></mat-divider>
+
 <h2>Done</h2>
 <app-todo-item *ngFor="let todo of completedTodos"
                [todo]="todo"
@@ -16,10 +34,6 @@
                (toggle)="onToggle(todo)">
 
 </app-todo-item>
-<!-- <mat-form-field class="form-field">
-     <input matInput type="text" placeholder="New todo">
-
- </mat-form-field>-->
 
 
 <button mat-button (click)="onAddClicked()">Add</button>

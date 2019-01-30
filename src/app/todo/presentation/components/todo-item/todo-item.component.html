@@ -1,12 +1,12 @@
-<div>
-
+<!--<div>
   <div  class="wrapper-test" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" >
     <mat-icon class="handle">reorder</mat-icon>
     <mat-checkbox [checked]="todo.completed" (change)="onCheckboxChanged()"></mat-checkbox>
-    <mat-form-field  fxFlex fxFlexAlign="center">
-      <input  matInput id="todo+{{todo.id}}" (focus)="onFocus($event)" (blur)="onBlur($event)" value="{{todo.text}}">
-    </mat-form-field>
+    <mat-form-field fxFlex fxFlexAlign="center" *ngIf="!todo.completed">
+      <input matInput id="todo+{{todo.id}}" (focus)="onInputFocus($event)" (blur)="onInputBlur($event)" value="{{todo.text}}">
 
+    </mat-form-field>
+    <span fxFlex fxFlexAlign="center" *ngIf="todo.completed" [class.todo-completed]="todo.completed">{{todo.text}}</span>
     <button type="button" mat-icon-button class="remove" (click)="onRemove(todo)">
       <mat-icon aria-label="Remove Todo">close</mat-icon>
     </button>
@@ -14,8 +14,37 @@
 
 
 
+</div>-->
+<div class="wrapper-test"
+     gdColumns="auto auto 1fr auto auto"
+     gdRows="1fr"
+     gdAlignColumns="end center"
+     gdGap="16px"
+     gdGap.xs="4px">
 
+    <mat-icon class="handle">reorder</mat-icon>
 
+    <mat-checkbox
+            [checked]="todo.completed"
+            (change)="onCheckboxChanged()">
+    </mat-checkbox>
+
+    <mat-form-field *ngIf="!todo.completed">
+        <input matInput
+               (focus)="onInputFocus($event)"
+               (blur)="onInputBlur($event)"
+               value="{{todo.text}}">
+    </mat-form-field>
+
+    <span *ngIf="todo.completed"
+          [class.todo-completed]="todo.completed">
+        {{todo.text}}
+    </span>
+    <button class="remove"
+            type="button"
+            mat-icon-button
+            (click)="onRemove(todo)">
+        <mat-icon aria-label="Remove Todo">close</mat-icon>
+    </button>
 </div>
-
 

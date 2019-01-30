@@ -1,7 +1,8 @@
 
 
-.todo-item {
 
+.todo-completed {
+  text-decoration: line-through;
 }
 
 .wrapper-test{
@@ -17,11 +18,12 @@
 
 .wrapper-test:hover .remove{
   visibility:visible;
+
 }
 
 .wrapper-test .handle {
   visibility:hidden;
-  position:relative;
+
 }
 .wrapper-test:hover .handle{
   visibility:visible;
