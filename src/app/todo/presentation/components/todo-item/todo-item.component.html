@@ -16,35 +16,44 @@
 
 </div>-->
 <div class="wrapper-test"
-     gdColumns="auto auto 1fr auto auto"
-     gdRows="1fr"
-     gdAlignColumns="end center"
-     gdGap="16px"
-     gdGap.xs="4px">
+     gdColumns="32px 32px 1fr 32px"
+    >
 
-    <mat-icon class="handle">reorder</mat-icon>
+    <div gdGridAlign="center center" class="handle">
 
-    <mat-checkbox
-            [checked]="todo.completed"
-            (change)="onCheckboxChanged()">
-    </mat-checkbox>
+            <mat-icon fxFlex aria-label="Reorder Todo">reorder</mat-icon>
 
-    <mat-form-field *ngIf="!todo.completed">
-        <input matInput
-               (focus)="onInputFocus($event)"
-               (blur)="onInputBlur($event)"
-               value="{{todo.text}}">
-    </mat-form-field>
+    </div>
 
-    <span *ngIf="todo.completed"
-          [class.todo-completed]="todo.completed">
+    <div gdGridAlign="center center" >
+        <mat-checkbox
+                [checked]="todo.completed"
+                (change)="onCheckboxChanged()">
+        </mat-checkbox>
+    </div>
+
+    <div *ngIf="!todo.completed" gdGridAlign="stretch center">
+        <mat-form-field fxFlexFill>
+            <input matInput
+                   (focus)="onInputFocus($event)"
+                   (blur)="onInputBlur($event)"
+                   value="{{todo.text}}">
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="todo.completed" gdGridAlign="stretch center"><span fxFlexFill
+                                      [class.todo-completed]="todo.completed">
         {{todo.text}}
-    </span>
-    <button class="remove"
-            type="button"
-            mat-icon-button
-            (click)="onRemove(todo)">
-        <mat-icon aria-label="Remove Todo">close</mat-icon>
-    </button>
+    </span></div>
+    <div gdGridAlign="center center">
+        <button class="remove"
+                type="button"
+                mat-icon-button
+                (click)="onRemove(todo)">
+            <mat-icon aria-label="Remove Todo">close</mat-icon>
+        </button>
+    </div>
+
+
 </div>
 

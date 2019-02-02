@@ -12,16 +12,19 @@
 </div>-->
 
 <div
-     gdAreas=". icon input . ."
-     gdColumns="auto auto 1fr auto auto"
-     gdRows="1fr"
-     gdAlignColumns="end center"
-     gdGap="16px"
-     gdGap.xs="4px">
-    <mat-icon gdArea="icon" gdColumn="2">add</mat-icon>
-    <mat-form-field gdArea="input" gdColumn="3">
-        <input matInput type="text" placeholder="New todo">
-    </mat-form-field>
+     gdAreas=". icon input ."
+     gdColumns="32px 32px 1fr 32px"
+
+    >
+    <div gdGridAlign="center center" gdArea="icon">
+        <mat-icon >add</mat-icon>
+    </div>
+    <div gdGridAlign="stretch center" gdArea="input">
+        <mat-form-field  fxFlexFill>
+            <input matInput type="text" placeholder="New todo">
+        </mat-form-field>
+    </div>
+
 </div>
 <mat-divider></mat-divider>
 

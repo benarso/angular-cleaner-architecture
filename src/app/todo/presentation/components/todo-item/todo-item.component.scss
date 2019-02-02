@@ -6,14 +6,12 @@
 }
 
 .wrapper-test{
- padding:4px;
+ //padding:4px;
 
 }
 
 .wrapper-test .remove{
   visibility:hidden;
-
-  z-index: 2;
 }
 
 .wrapper-test:hover .remove{
