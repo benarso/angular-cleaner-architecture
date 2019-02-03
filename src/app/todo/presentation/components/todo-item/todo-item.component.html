@@ -10,9 +10,8 @@
 
     <div *ngIf="!todo.completed" gdGridAlign="stretch center">
         <mat-form-field fxFlexFill>
-            <input appInputAutofocus [shouldFocus]="todo.isEditing"
-                   matInput
-
+            <input matInput
+                   appInputAutofocus [shouldFocus]="todo.isEditing"
                    [formControl]="todoText">
         </mat-form-field>
     </div>

@@ -12,8 +12,10 @@ export enum TodoActionTypes {
     ApiFailure = '[Todo Api] Load Todos Failure',
     RemoveTodo = '[TodoListComponent] Remove Todo',
     RemoveTodoSuccess = '[TodoApi] Remove Todo Success',
-    ToggleTodo = '{TodoListComponent] Toggle Todo',
+    ToggleTodo = '[ToggleTodoUsecase] Toggle Todo',
     ToggleTodoSuccess = '[Todo Api] Todo Toggle Success',
+    UpdateTodo = '[UpdateTodoUsecase] Update Todo',
+    UpdateTodoSuccess = '[Todo Api] Update Todo Success',
     UpdateTodoState = '[Storage] Update Todo State',
 }
 
@@ -65,11 +67,20 @@ export class RemoveTodoSuccess implements Action {
 
 export class ToggleTodo implements Action {
     readonly type = TodoActionTypes.ToggleTodo;
-    constructor(readonly payload:  Update<Todo>) {}
+    constructor(readonly payload: Update<Todo>) {}
 }
 
 export class ToggleTodoSuccess implements Action {
     readonly type = TodoActionTypes.ToggleTodoSuccess;
+    constructor(readonly payload: Todo) {}
+}
+
+export class UpdateTodo implements Action {
+    readonly type = TodoActionTypes.UpdateTodo;
+    constructor(readonly payload: Update<Todo>) {}
+}
+export class UpdateTodoSuccess implements Action {
+    readonly type = TodoActionTypes.UpdateTodoSuccess;
     constructor(readonly payload: Todo) {}
 }
 
@@ -90,4 +101,6 @@ export type TodoActions =
     | RemoveTodoSuccess
     | UpdateTodoState
     | ToggleTodo
-    | ToggleTodoSuccess;
+    | ToggleTodoSuccess
+    | UpdateTodo
+    | UpdateTodoSuccess;

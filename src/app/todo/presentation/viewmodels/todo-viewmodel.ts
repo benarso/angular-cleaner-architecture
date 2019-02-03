@@ -6,5 +6,11 @@ export class TodoViewmodel extends ViewModel {
     completed: boolean;
     position: number;
     isEditing = false;
+
+
+    constructor(text: string) {
+        super();
+        this.text = text;
+    }
 }
 

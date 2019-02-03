@@ -6,7 +6,7 @@ import {
     LoadTodoSuccess,
     RemoveTodo,
     RemoveTodoSuccess,
-    TodoActionTypes, ToggleTodo, UpdateTodoState, ToggleTodoSuccess, LoadTodos
+    TodoActionTypes, ToggleTodo, UpdateTodoState, ToggleTodoSuccess, LoadTodos, UpdateTodoSuccess, UpdateTodo
 } from '../actions/todo.actions';
 import {catchError, filter, map, mapTo, switchMap, tap} from 'rxjs/operators';
 import {fromEvent, of} from 'rxjs';
@@ -81,13 +81,26 @@ export class TodoEffects {
     );*/
 
     @Effect()
-    updateTodo$ = this.actions$.pipe(
+    toggleTodo$ = this.actions$.pipe(
         ofType<ToggleTodo>(TodoActionTypes.ToggleTodo),
         switchMap(action => {
-            console.warn(action.payload.changes.completed)
             return this.todoService.updateTodo(action.payload.id, action.payload.changes).pipe(
                 map((todo: Todo) => {
                         return new ToggleTodoSuccess(todo);
+                    }
+                ),
+                catchError((e: HttpErrorResponse) => of(new ApiFailure(e)))
+            );
+        }),
+    );
+
+    @Effect()
+    updateTodo$ = this.actions$.pipe(
+        ofType<UpdateTodo>(TodoActionTypes.UpdateTodo),
+        switchMap(action => {
+            return this.todoService.updateTodo(action.payload.id, action.payload.changes).pipe(
+                map((todo: Todo) => {
+                        return new UpdateTodoSuccess(todo);
                     }
                 ),
                 catchError((e: HttpErrorResponse) => of(new ApiFailure(e)))

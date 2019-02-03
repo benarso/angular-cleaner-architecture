@@ -37,6 +37,8 @@ export function reducer(state = initialState, action: TodoActions): State {
 
         case TodoActionTypes.ToggleTodo:
             return adapter.updateOne(action.payload, state);
+        case TodoActionTypes.UpdateTodo:
+            return adapter.updateOne(action.payload, state);
 
         case TodoActionTypes.UpdateTodoState:
             return action.payload;

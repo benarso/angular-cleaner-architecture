@@ -1,15 +1,17 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {TodoPresenter} from '../../presenter/todo-presenter.service';
 import {TodoViewmodel} from '../../viewmodels/todo-viewmodel';
-import {Observable} from 'rxjs';
-import {filter, map, switchMap} from 'rxjs/operators';
+import {Observable, Observer, Subscription} from 'rxjs';
+import {debounceTime, filter, map, switchMap, takeLast} from 'rxjs/operators';
 import {Todo} from '../../../domain/models/todo';
 import {MessagingService} from '../../../../core/domain/messaging-service';
+import {FormControl} from '@angular/forms';
 
 @Component({
     selector: 'app-todo-list',
     templateUrl: './todo-list.component.html',
     styleUrls: ['./todo-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoListComponent implements OnInit {
 
@@ -18,6 +20,10 @@ export class TodoListComponent implements OnInit {
 
     todos$ = this.presenter.loadTodos();
     todos: TodoViewmodel[];
+    newTodoInput = new FormControl('');
+
+    addTodoSubscription: Subscription;
+
 
     ngOnInit() {
         this.todos$.subscribe(todos => {
@@ -25,6 +31,14 @@ export class TodoListComponent implements OnInit {
             // Start editing on the last todo item
             this.todos[this.todos.length - 1 ].isEditing = true;
         });
+
+       this.newTodoInput.valueChanges.subscribe(value => {
+            if (this.newTodoInput.dirty) {
+                this.addTodo(value);
+                this.newTodoInput.reset();
+            }
+        });
+
     }
 
     private getRandomInt(max) {
@@ -54,11 +68,17 @@ export class TodoListComponent implements OnInit {
         return this.todos.filter(todo => !todo.completed);
     }
 
-    onChanged(todo: TodoViewmodel) {
+    onTodoChanged(todo: TodoViewmodel) {
         console.warn('changed ' + todo.text);
+        this.presenter.updateTodo(todo);
     }
 
     onToggled(todo: TodoViewmodel) {
         return this.presenter.toggleTodo(todo);
+    }
+
+    private addTodo(value: string) {
+        const todo = new TodoViewmodel(value);
+        this.presenter.addTodo(todo);
     }
 }

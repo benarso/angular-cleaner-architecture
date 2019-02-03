@@ -19,9 +19,8 @@ export class TodoMapper implements Mapper<Todo, TodoViewmodel> {
     }
 
     mapToViewmodel(domainModel: Todo): TodoViewmodel {
-        const viewmodel: TodoViewmodel = new TodoViewmodel();
+        const viewmodel: TodoViewmodel = new TodoViewmodel(domainModel.text);
         viewmodel.completed = domainModel.completed;
-        viewmodel.text = domainModel.text;
         viewmodel.position = domainModel.position;
         viewmodel.id = domainModel.id;
         return viewmodel;

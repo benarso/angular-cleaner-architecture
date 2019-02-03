@@ -13,7 +13,7 @@ import {AutofocusDirective} from './presentation/directives/InputAutofocus';
 import {MaterialModule} from '../material/material.module';
 import {MockTodoService} from './data/api/mock-todo-service';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +25,8 @@ import {FormsModule} from '@angular/forms';
         StoreModule.forFeature('todo', fromTodo.reducer),
         EffectsModule.forFeature([TodoEffects]),
         MaterialModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        ReactiveFormsModule
     ],
     providers: [
         {provide: TodoService, useClass: ApiTodoService}

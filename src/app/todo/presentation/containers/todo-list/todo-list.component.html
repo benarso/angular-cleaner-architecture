@@ -1,14 +1,15 @@
-<h2>Todo</h2>
-
+<h2>Todo list</h2>
+<h3>Todo</h3>
 <div *ngFor="let todo of incompleteTodos" class="todo-list">
     <div gdAreas="handle todo remove"
-         gdColumns="32px 1fr 32px">
+         gdColumns="32px 1fr 32px"
+    >
 
         <div gdArea="handle" gdGridAlign="center center" class="handle">
             <mat-icon fxFlex aria-label="Reorder Todo">reorder</mat-icon>
         </div>
 
-        <app-todo-item gdarea="todo" [todo]="todo" (changed)="onChanged($event)" (toggled)="onToggled($event)"></app-todo-item>
+        <app-todo-item gdarea="todo" [todo]="todo" (changed)="onTodoChanged($event)" (toggled)="onToggled($event)"></app-todo-item>
 
         <div gdArea="remove" gdGridAlign="center center">
             <button class="remove"
@@ -21,7 +22,22 @@
 
     </div>
 </div>
+<div gdAreas=". icon input . "
+     gdColumns="32px 32px 1fr 32px"
+>
+    <div gdArea="icon" gdGridAlign="center center">
+        <mat-icon fxFlex>add</mat-icon>
+    </div>
+    <div gdArea="input">
+        <mat-form-field fxFlexFill>
+            <input matInput [formControl]="newTodoInput">
+        </mat-form-field>
+    </div>
 
+
+</div>
+<mat-divider></mat-divider>
+<h3>Done</h3>
 <div *ngFor="let todo of completedTodos" class="todo-list">
     <div gdAreas="handle todo remove"
          gdColumns="32px 1fr 32px">
@@ -30,7 +46,7 @@
             <mat-icon fxFlex aria-label="Reorder Todo">reorder</mat-icon>
         </div>
 
-        <app-todo-item gdarea="todo" [todo]="todo" (changed)="onChanged($event)" (toggled)="onToggled($event)"></app-todo-item>
+        <app-todo-item gdarea="todo" [todo]="todo" (changed)="onTodoChanged($event)" (toggled)="onToggled($event)"></app-todo-item>
 
         <div gdArea="remove" gdGridAlign="center center">
             <button class="remove"
