@@ -1,46 +1,26 @@
-<!--<div>
-  <div  class="wrapper-test" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" >
-    <mat-icon class="handle">reorder</mat-icon>
-    <mat-checkbox [checked]="todo.completed" (change)="onCheckboxChanged()"></mat-checkbox>
-    <mat-form-field fxFlex fxFlexAlign="center" *ngIf="!todo.completed">
-      <input matInput id="todo+{{todo.id}}" (focus)="onInputFocus($event)" (blur)="onInputBlur($event)" value="{{todo.text}}">
-
-    </mat-form-field>
-    <span fxFlex fxFlexAlign="center" *ngIf="todo.completed" [class.todo-completed]="todo.completed">{{todo.text}}</span>
-    <button type="button" mat-icon-button class="remove" (click)="onRemove(todo)">
-      <mat-icon aria-label="Remove Todo">close</mat-icon>
-    </button>
-  </div>
-
-
-
-</div>-->
-<div class="wrapper-test"
-     gdColumns="32px 1fr"
->
+<div
+     gdColumns="32px 1fr">
 
     <div gdGridAlign="center center">
         <mat-checkbox
                 [checked]="todo.completed"
-                (change)="onCheckboxChanged()">
+                (change)="onCheckboxChanged($event)">
         </mat-checkbox>
     </div>
 
     <div *ngIf="!todo.completed" gdGridAlign="stretch center">
         <mat-form-field fxFlexFill>
-            <input appInputAutofocus [shouldFocus]="todo.isEditing" matInput
-                   (focus)="onInputFocus($event)"
-                   (blur)="onInputBlur($event)"
-                   value="{{todo.text}}">
+            <input appInputAutofocus [shouldFocus]="todo.isEditing"
+                   matInput
+
+                   [formControl]="todoText">
         </mat-form-field>
     </div>
 
     <div *ngIf="todo.completed" gdGridAlign="stretch center">
         <span fxFlexFill [class.todo-completed]="todo.completed">
-        {{todo.text}}
-    </span>
+            {{todo.text}}
+        </span>
     </div>
-
-
 </div>
 

@@ -22,24 +22,9 @@ export class TodoListComponent implements OnInit {
     ngOnInit() {
         this.todos$.subscribe(todos => {
             this.todos = todos;
-            //Start edititing on the last todo item
-            this.onStartEditing(this.todos[this.todos.length - 1 ]);
+            // Start editing on the last todo item
+            this.todos[this.todos.length - 1 ].isEditing = true;
         });
-    }
-
-    onTodoClicked(clickedTodo: TodoViewmodel) {
-        console.warn('onTodoClicked');
-        clickedTodo.isEditing = !clickedTodo.isEditing;
-    }
-
-    onStartEditing(todo: TodoViewmodel) {
-        console.warn('onStartEditing');
-        todo.isEditing = true;
-    }
-
-    onStopEditing(todo: TodoViewmodel) {
-        console.warn('onStopEditing');
-        todo.isEditing = false;
     }
 
     private getRandomInt(max) {
@@ -61,15 +46,19 @@ export class TodoListComponent implements OnInit {
         this.presenter.removeTodo(todo);
     }
 
-    onToggle(todo: TodoViewmodel) {
-        return this.presenter.toggleTodo(todo);
-    }
-
     get completedTodos() {
         return this.todos.filter(todo => todo.completed);
     }
 
     get incompleteTodos() {
         return this.todos.filter(todo => !todo.completed);
+    }
+
+    onChanged(todo: TodoViewmodel) {
+        console.warn('changed ' + todo.text);
+    }
+
+    onToggled(todo: TodoViewmodel) {
+        return this.presenter.toggleTodo(todo);
     }
 }

@@ -1,7 +1,33 @@
-.form {
-  width: 100%
+
+
+
+
+
+.todo-completed {
+  text-decoration: line-through;
+}
+
+.todo-list{
+  //padding:4px;
 
 }
-.form-field {
-  width: 100%
+
+.todo-list .remove{
+  visibility:hidden;
+}
+
+.todo-list:hover .remove{
+  visibility:visible;
+
+}
+
+.todo-list .handle {
+  visibility:hidden;
+
+}
+.todo-list:hover .handle{
+  visibility:visible;
+}
+.todo-list:hover{
+
 }
