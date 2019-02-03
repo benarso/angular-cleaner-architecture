@@ -1,21 +1,41 @@
 <h2>Todo</h2>
-<app-todo-item *ngFor="let todo of incompleteTodos"
+
+<div *ngFor="let todo of incompleteTodos">
+    <div gdAreas="handle todo remove"
+         gdColumns="32px 1fr 32px">
+
+        <div gdArea="handle" gdGridAlign="center center" >
+            <mat-icon fxFlex aria-label="Reorder Todo">reorder</mat-icon>
+        </div>
+
+        <app-todo-item gdarea="todo" [todo]="todo" ></app-todo-item>
+
+        <div gdArea="remove" gdGridAlign="center center">
+            <button class="remove"
+                    type="button"
+                    mat-icon-button
+                    (click)="onRemove(todo)">
+                <mat-icon aria-label="Remove Todo">close</mat-icon>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!--<app-todo-item *ngFor="let todo of incompleteTodos"
                [todo]="todo"
                (startEditing)="onStartEditing(todo)"
                (stopEditing)="onStopEditing(todo)"
                (remove)="onRemove(todo)"
                (toggle)="onToggle(todo)">
-</app-todo-item>
+</app-todo-item>-->
 
 <!--<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
 
 </div>-->
 
-<div
-     gdAreas=". icon input ."
-     gdColumns="32px 32px 1fr 32px"
-
-    >
+<!--<div gdAreas=". icon input ."
+     gdColumns="32px 32px 1fr 32px">
     <div gdGridAlign="center center" gdArea="icon">
         <mat-icon >add</mat-icon>
     </div>
@@ -24,7 +44,6 @@
             <input matInput type="text" placeholder="New todo">
         </mat-form-field>
     </div>
-
 </div>
 <mat-divider></mat-divider>
 
@@ -36,7 +55,7 @@
                (remove)="onRemove(todo)"
                (toggle)="onToggle(todo)">
 
-</app-todo-item>
+</app-todo-item>-->
 
 
 <button mat-button (click)="onAddClicked()">Add</button>

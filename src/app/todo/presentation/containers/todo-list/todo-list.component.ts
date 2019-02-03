@@ -20,7 +20,11 @@ export class TodoListComponent implements OnInit {
     todos: TodoViewmodel[];
 
     ngOnInit() {
-        this.todos$.subscribe(todos => this.todos = todos);
+        this.todos$.subscribe(todos => {
+            this.todos = todos;
+            //Start edititing on the last todo item
+            this.onStartEditing(this.todos[this.todos.length - 1 ]);
+        });
     }
 
     onTodoClicked(clickedTodo: TodoViewmodel) {
