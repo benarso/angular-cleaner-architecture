@@ -34,7 +34,7 @@ export function reducer(state = initialState, action: TodoActions): State {
                 loading: false,
             });
 
-        case TodoActionTypes.RemoveTodoSuccess:
+        case TodoActionTypes.RemoveTodo:
             return adapter.removeOne(action.payload.id, state);
 
         case TodoActionTypes.ToggleTodo:

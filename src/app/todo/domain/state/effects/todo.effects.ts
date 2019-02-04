@@ -51,7 +51,7 @@ export class TodoEffects {
     @Effect()
     removeTodo$ = this.actions$.pipe(
         ofType<RemoveTodo>(TodoActionTypes.RemoveTodo),
-        switchMap(action => {
+        concatMap(action => {
             return this.todoService.removeTodo(action.payload).pipe(
                 map((todo) => {
                         return new RemoveTodoSuccess(action.payload);
