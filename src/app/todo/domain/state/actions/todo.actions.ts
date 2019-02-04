@@ -17,6 +17,8 @@ export enum TodoActionTypes {
     UpdateTodo = '[UpdateTodoUsecase] Update Todo',
     UpdateTodoSuccess = '[Todo Api] Update Todo Success',
     UpdateTodoState = '[Storage] Update Todo State',
+    StartTodoEdit = '[StartTodoEditUsecase] Start todo edit',
+    StopTodoEdit = '[StopTodoEditUsecase] Stop todo edit'
 }
 
 export class LoadTodos implements Action {
@@ -91,6 +93,15 @@ export class UpdateTodoState implements Action {
     }
 }
 
+export class StartTodoEdit implements Action {
+    readonly type = TodoActionTypes.StartTodoEdit;
+    constructor(readonly payload: Todo) {}
+}
+
+export class StopTodoEdit implements Action {
+    readonly type = TodoActionTypes.StopTodoEdit;
+}
+
 export type TodoActions =
     LoadTodos
     | LoadTodoSuccess
@@ -103,4 +114,6 @@ export type TodoActions =
     | ToggleTodo
     | ToggleTodoSuccess
     | UpdateTodo
-    | UpdateTodoSuccess;
+    | UpdateTodoSuccess
+    | StartTodoEdit
+    | StopTodoEdit;

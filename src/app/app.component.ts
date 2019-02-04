@@ -24,7 +24,7 @@ export class AppComponent {
         store.select(fromAuth.selectAuthenticated).subscribe(authenticated => this.authenticated = authenticated);
         messagingService.getMessages().subscribe(message => {
             console.log(message.message);
-            snackbar.open(message.message, '', {duration: 2500});
+            //snackbar.open(message.message, '', {duration: 2500});
         });
     }
     title = 'TodoManager';

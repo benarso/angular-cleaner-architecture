@@ -7,11 +7,13 @@ export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 export interface State extends EntityState<Todo> {
     loading: boolean;
     loaded: boolean;
+    currentlyEditedTodo: Todo;
 }
 
 export const initialState: State = adapter.getInitialState({
     loading: false,
-    loaded: true
+    loaded: true,
+    currentlyEditedTodo: null
 });
 
 export function reducer(state = initialState, action: TodoActions): State {
@@ -43,6 +45,15 @@ export function reducer(state = initialState, action: TodoActions): State {
         case TodoActionTypes.UpdateTodoState:
             return action.payload;
 
+        case TodoActionTypes.StartTodoEdit:
+            return Object.assign({}, state, {
+                currentlyEditedTodo: action.payload
+            });
+
+        case TodoActionTypes.StopTodoEdit:
+            return Object.assign({}, state, {
+                currentlyEditedTodo: null
+            });
         default:
             return state;
     }
@@ -56,3 +67,4 @@ const {
 } = adapter.getSelectors();
 
 export const getTodos = selectAll;
+export const getCurrentlyEditedTodo = (state: State) => state.currentlyEditedTodo;

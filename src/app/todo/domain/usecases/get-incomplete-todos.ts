@@ -9,7 +9,7 @@ import {Injectable} from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export class LoadTodosUsecase extends ObservableUseCase<Todo[]> {
+export class GetIncompleteTodosUsecase extends ObservableUseCase<Todo[]> {
 
     private constructor(private store: Store<any>) {
         super();
@@ -21,6 +21,6 @@ export class LoadTodosUsecase extends ObservableUseCase<Todo[]> {
         this.store.dispatch(new LoadTodos());
 
         // Forward store data to presentation layer
-        return this.store.select(fromTodo.selectAllTodos);
+        return this.store.select(fromTodo.selectIncomplete);
     }
 }

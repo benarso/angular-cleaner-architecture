@@ -51,7 +51,7 @@ export class ApiTodoService extends TodoService {
 
     updateTodo(id: string, changes: Todo) {
         return this.http.put(`${this.BASEURL}/${id}`, changes).pipe(
-            delay(500)
+
         );
     }
 }

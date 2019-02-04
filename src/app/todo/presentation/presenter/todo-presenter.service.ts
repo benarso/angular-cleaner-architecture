@@ -1,18 +1,18 @@
 import {Todo} from '../../domain/models/todo';
 import {Injectable} from '@angular/core';
 import {Presenter} from '../../../core/presentation/presenter';
-import {Usecase} from '../../../core/domain/usecase';
-import {Observable, of} from 'rxjs';
-import {LoadTodosUsecase} from '../../domain/usecases/load-todos';
+import {GetIncompleteTodosUsecase} from '../../domain/usecases/get-incomplete-todos';
 import {TodoViewmodel} from '../viewmodels/todo-viewmodel';
-import {map, mapTo, mergeMap, switchMap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {TodoMapper} from './mappers/todo-mapper';
-import {TodoModule} from '../../todo.module';
-import {TodoListComponent} from '../containers/todo-list/todo-list.component';
 import {AddTodoUsecase} from '../../domain/usecases/add-todo';
 import {RemoveTodoUsecase} from '../../domain/usecases/remove-todo';
 import {ToggleTodoUsecase} from '../../domain/usecases/toggle-todo';
 import {UpdateTodoUsecase} from '../../domain/usecases/update-todo';
+import {GetCompletedTodosUsecase} from '../../domain/usecases/get-completed-todos';
+import {StartTodoEditUsecase} from '../../domain/usecases/start-todo-edit';
+import {StopTodoEditUsecase} from '../../domain/usecases/stop-todo-edit';
+import {GetCurrentlyEditedTodoUsecase} from '../../domain/usecases/get-currently-edited-todo';
 
 @Injectable({
     providedIn: 'root'
@@ -20,21 +20,39 @@ import {UpdateTodoUsecase} from '../../domain/usecases/update-todo';
 export class TodoPresenter extends Presenter {
 
     constructor(
-        private loadTodoUsecase: LoadTodosUsecase,
+        private getCompletedTodosUsecase: GetCompletedTodosUsecase,
+        private getIncompleteTodosUsecase: GetIncompleteTodosUsecase,
+        private getCurrentlyEditedTodoUsecase: GetCurrentlyEditedTodoUsecase,
         private addTodoUsecase: AddTodoUsecase,
         private removeTodoUsecase: RemoveTodoUsecase,
         private todoMapper: TodoMapper,
         private toggleTodoUsecase: ToggleTodoUsecase,
-        private updateTodoUsecase: UpdateTodoUsecase) {
+        private updateTodoUsecase: UpdateTodoUsecase,
+        private startTodoEditUsecase: StartTodoEditUsecase,
+        private stopTodoEditUseCase: StopTodoEditUsecase) {
         super();
     }
 
-    loadTodos(): Observable<TodoViewmodel[]> {
-        return this.loadTodoUsecase.execute().pipe(
+    getCompletedTodos() {
+        return this.getCompletedTodosUsecase.execute().pipe(
             // map model(domain) to viewmodel(presentation)
-            map((todos) => todos.map(todo => this.todoMapper.mapToViewmodel(todo)))
+            map((todos: Todo[]) => todos.map(todo => this.todoMapper.mapToViewmodel(todo)))
         );
     }
+
+    getIncompleteTodos() {
+        return this.getIncompleteTodosUsecase.execute().pipe(
+            // map model(domain) to viewmodel(presentation)
+            map((todos: Todo[]) => todos.map(todo => this.todoMapper.mapToViewmodel(todo)))
+        );
+    }
+
+    getCurrentlyEditedTodo() {
+        return this.getCurrentlyEditedTodoUsecase.execute().pipe(
+            map((todo: Todo) => todo ? this.todoMapper.mapToViewmodel(todo) : null)
+        );
+    }
+
 
     addTodo(todo: TodoViewmodel) {
         this.addTodoUsecase.execute(this.todoMapper.mapToModel(todo));
@@ -54,6 +72,14 @@ export class TodoPresenter extends Presenter {
 
     updateTodo(todo: TodoViewmodel) {
         this.updateTodoUsecase.execute(this.todoMapper.mapToModel(todo));
+    }
+
+    startTodoEdit(todo: TodoViewmodel) {
+        this.startTodoEditUsecase.execute(todo);
+    }
+
+    stopTodoEdit() {
+        this.stopTodoEditUseCase.execute();
     }
 }
 
