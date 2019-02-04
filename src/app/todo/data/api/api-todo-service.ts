@@ -4,7 +4,6 @@ import {Observable, of} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {del} from 'selenium-webdriver/http';
 @Injectable({providedIn: 'root'})
 export class ApiTodoService extends TodoService {
 
@@ -37,21 +36,26 @@ export class ApiTodoService extends TodoService {
     }
 
     loadTodos(): Observable<Todo[]> {
-        return this.http.get<Todo[]>(this.BASEURL);
-        // return of(ApiTodoService.MOCKTODOS).pipe(delay(1500));
+        return this.http.get<Todo[]>(this.BASEURL).pipe(
+            delay(500)
+        );
     }
     addTodo(todo: Todo) {
-        return this.http.post<Todo>(this.BASEURL, todo);
+        return this.http.post<Todo>(this.BASEURL, todo).pipe(
+            delay(500)
+        );
     }
 
     removeTodo(todo: Todo) {
         const url = `${this.BASEURL}/${todo.id}`;
-        return this.http.delete(url);
+        return this.http.delete(url).pipe(
+            delay(500)
+        );
     }
 
     updateTodo(id: string, changes: Todo) {
         return this.http.put(`${this.BASEURL}/${id}`, changes).pipe(
-
+            delay(500)
         );
     }
 }
