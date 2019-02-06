@@ -30,7 +30,6 @@ import {Subscription} from 'rxjs';
 export class TodoItemComponent implements OnInit, OnDestroy {
 
     @Input() todo: TodoViewmodel;
-    @Input() isEditing: boolean;
     @Output() toggled = new EventEmitter();
     @Output() changed = new EventEmitter();
     @Output() startEdit = new EventEmitter();

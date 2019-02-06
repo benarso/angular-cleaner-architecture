@@ -37,7 +37,7 @@ export class ApiTodoService extends TodoService {
 
     loadTodos(): Observable<Todo[]> {
         return this.http.get<Todo[]>(this.BASEURL).pipe(
-            delay(500)
+            delay(2500)
         );
     }
     addTodo(todo: Todo) {

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import {TodoListComponent} from './presentation/containers/todo-list/todo-list.component';
+import {TodoListComponent} from './presentation/components/todo-list/todo-list.component';
 
 export const componentDeclarations: any[] = [
 ];

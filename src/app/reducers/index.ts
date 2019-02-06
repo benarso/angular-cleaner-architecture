@@ -15,7 +15,7 @@ export interface State {
 export function sessionStorage(reducer: ActionReducer<any>): ActionReducer<any> {
     const config: LocalStorageConfig = {
         keys: [
-            'auth', 'todo'
+            'auth'/*, 'todo'*/
         ],
         rehydrate: true,
         removeOnUndefined: false

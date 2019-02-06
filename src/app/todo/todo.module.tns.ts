@@ -1,6 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
-import {TodoListComponent} from './presentation/containers/todo-list/todo-list.component';
+import {TodoListComponent} from './presentation/components/todo-list/todo-list.component';
 import {TodoItemComponent} from './presentation/components/todo-item/todo-item.component';
 import {TodoRoutingModule} from './todo-routing.module';
 import {StoreModule} from '@ngrx/store';

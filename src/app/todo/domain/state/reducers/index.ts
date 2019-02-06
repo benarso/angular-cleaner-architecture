@@ -14,6 +14,5 @@ export const metaReducers: MetaReducer<State>[] = [];
 
 export const selectTodoState = createFeatureSelector<fromTodo.State>('todo');
 export const selectAllTodos = createSelector(selectTodoState, fromTodo.getTodos);
-export const selectCompleted = createSelector(selectAllTodos, todos => todos.filter(todo => todo.completed));
-export const selectIncomplete = createSelector(selectAllTodos, todos => todos.filter(todo => !todo.completed) );
-export const selectCurrentlyEditedTodo = createSelector(selectTodoState, fromTodo.getCurrentlyEditedTodo);
+export const selectLoading = createSelector(selectTodoState, fromTodo.getLoading);
+export const selectError = createSelector(selectTodoState, fromTodo.getError);

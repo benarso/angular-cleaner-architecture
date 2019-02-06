@@ -1,7 +1,7 @@
-<h2>Todo list</h2>
+
 <h3>Todo</h3>
 
-<div *ngFor="let todo of incompleteTodos$  | async; trackBy: trackByFn" class="todo-list">
+<div *ngFor="let todo of complete; trackBy: trackByFn" class="todo-list">
     <div gdAreas="handle todo remove"
          gdColumns="32px 1fr 32px">
 
@@ -9,13 +9,13 @@
             <mat-icon fxFlex aria-label="Reorder Todo">reorder</mat-icon>
         </div>
 
-        <app-todo-item gdArea="todo" [todo]="todo" [isEditing]="isEditing(todo)" (startEdit)="onStartEdit($event)" (stopEdit)="onStopEdit($event)" (changed)="onTodoChanged($event)" (toggled)="onTodoToggled($event)"></app-todo-item>
+        <app-todo-item gdArea="todo" [todo]="todo" (changed)="changed.emit(todo)" (toggled)="toggle.emit(todo)"></app-todo-item>
 
         <div gdArea="remove" gdGridAlign="center center">
             <button class="remove"
                     type="button"
                     mat-icon-button
-                    (click)="onRemove(todo)">
+                    (click)="remove.emit(todo)">
                 <mat-icon aria-label="Remove Todo">close</mat-icon>
             </button>
         </div>
@@ -30,13 +30,13 @@
     </div>
     <div gdArea="input">
         <mat-form-field fxFlexFill>
-            <input matInput [formControl]="newTodoInput">
+            <input matInput #addInput [formControl]="newTodoInput">
         </mat-form-field>
     </div>
 </div>
 <mat-divider></mat-divider>
 <h3>Done</h3>
-<div *ngFor="let todo of completedTodos$ | async; trackBy: trackByFn" class="todo-list">
+<div *ngFor="let todo of incomplete ; trackBy: trackByFn" class="todo-list">
     <div gdAreas="handle todo remove"
          gdColumns="32px 1fr 32px">
 
@@ -44,13 +44,13 @@
             <mat-icon fxFlex aria-label="Reorder Todo">reorder</mat-icon>
         </div>
 
-        <app-todo-item gdArea="todo" [todo]="todo"  (changed)="onTodoChanged($event)" (toggled)="onTodoToggled($event)"></app-todo-item>
+        <app-todo-item gdArea="todo" [todo]="todo"  (changed)="changed.emit(todo)" (toggled)="toggle.emit(todo)"></app-todo-item>
 
         <div gdArea="remove" gdGridAlign="center center">
             <button class="remove"
                     type="button"
                     mat-icon-button
-                    (click)="onRemove(todo)">
+                    (click)="remove.emit(todo)">
                 <mat-icon aria-label="Remove Todo">close</mat-icon>
             </button>
         </div>

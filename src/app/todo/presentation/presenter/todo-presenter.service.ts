@@ -1,18 +1,15 @@
 import {Todo} from '../../domain/models/todo';
 import {Injectable} from '@angular/core';
 import {Presenter} from '../../../core/presentation/presenter';
-import {GetIncompleteTodosUsecase} from '../../domain/usecases/get-incomplete-todos';
 import {TodoViewmodel} from '../viewmodels/todo-viewmodel';
-import {map} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 import {TodoMapper} from './mappers/todo-mapper';
 import {AddTodoUsecase} from '../../domain/usecases/add-todo';
 import {RemoveTodoUsecase} from '../../domain/usecases/remove-todo';
 import {ToggleTodoUsecase} from '../../domain/usecases/toggle-todo';
 import {UpdateTodoUsecase} from '../../domain/usecases/update-todo';
-import {GetCompletedTodosUsecase} from '../../domain/usecases/get-completed-todos';
-import {StartTodoEditUsecase} from '../../domain/usecases/start-todo-edit';
-import {StopTodoEditUsecase} from '../../domain/usecases/stop-todo-edit';
-import {GetCurrentlyEditedTodoUsecase} from '../../domain/usecases/get-currently-edited-todo';
+import {GetTodos} from '../../domain/usecases/get-todos';
+import {GetLoadingUsecase} from '../../domain/usecases/get-loading';
 
 @Injectable({
     providedIn: 'root'
@@ -20,39 +17,41 @@ import {GetCurrentlyEditedTodoUsecase} from '../../domain/usecases/get-currently
 export class TodoPresenter extends Presenter {
 
     constructor(
-        private getCompletedTodosUsecase: GetCompletedTodosUsecase,
-        private getIncompleteTodosUsecase: GetIncompleteTodosUsecase,
-        private getCurrentlyEditedTodoUsecase: GetCurrentlyEditedTodoUsecase,
+        private getTodosUsecase: GetTodos,
         private addTodoUsecase: AddTodoUsecase,
         private removeTodoUsecase: RemoveTodoUsecase,
         private todoMapper: TodoMapper,
         private toggleTodoUsecase: ToggleTodoUsecase,
         private updateTodoUsecase: UpdateTodoUsecase,
-        private startTodoEditUsecase: StartTodoEditUsecase,
-        private stopTodoEditUseCase: StopTodoEditUsecase) {
+        private getLoadingUsecase: GetLoadingUsecase) {
         super();
     }
 
-    getCompletedTodos() {
-        return this.getCompletedTodosUsecase.execute().pipe(
+    getLoading() {
+        return this.getLoadingUsecase.execute();
+    }
+
+    getTodos() {
+        return this.getTodosUsecase.execute().pipe(
             // map model(domain) to viewmodel(presentation)
-            map((todos: Todo[]) => todos.map(todo => this.todoMapper.mapToViewmodel(todo)))
+            map((todos: Todo[]) => todos.map(todo => {
+                const viewModel: TodoViewmodel = this.todoMapper.mapToViewmodel(todo);
+                return todos[todos.length - 1 ].id === todo.id ? {...viewModel, isEditing: true} : viewModel;
+            }))
         );
+        /*
+        return this.getTodosUsecase.execute().pipe(
+            // map model(domain) to viewmodel(presentation)
+            map((todos: Todo[]) => todos.filter(value => value.completed).map(todo => this.todoMapper.mapToViewmodel(todo)))
+        );*/
     }
 
     getIncompleteTodos() {
-        return this.getIncompleteTodosUsecase.execute().pipe(
+        return this.getTodosUsecase.execute().pipe(
             // map model(domain) to viewmodel(presentation)
-            map((todos: Todo[]) => todos.map(todo => this.todoMapper.mapToViewmodel(todo)))
+            map((todos: Todo[]) => todos.filter(value => !value.completed).map(todo => this.todoMapper.mapToViewmodel(todo)))
         );
     }
-
-    getCurrentlyEditedTodo() {
-        return this.getCurrentlyEditedTodoUsecase.execute().pipe(
-            map((todo: Todo) => todo ? this.todoMapper.mapToViewmodel(todo) : null)
-        );
-    }
-
 
     addTodo(todo: TodoViewmodel) {
         this.addTodoUsecase.execute(this.todoMapper.mapToModel(todo));
@@ -75,11 +74,11 @@ export class TodoPresenter extends Presenter {
     }
 
     startTodoEdit(todo: TodoViewmodel) {
-        this.startTodoEditUsecase.execute(todo);
+
     }
 
     stopTodoEdit() {
-        this.stopTodoEditUseCase.execute();
+
     }
 }
 

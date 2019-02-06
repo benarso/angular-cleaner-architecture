@@ -11,7 +11,7 @@
     <div *ngIf="!todo.completed" gdGridAlign="stretch center">
         <mat-form-field fxFlexFill>
             <input matInput
-                   appInputAutofocus [shouldFocus]="isEditing"
+                   appInputAutofocus [shouldFocus]="todo.isEditing"
                    [formControl]="todoText"
                    (focus)="onInputFocus()"
                    (blur)="onBlur()"

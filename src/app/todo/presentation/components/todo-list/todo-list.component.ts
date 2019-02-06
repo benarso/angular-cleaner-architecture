@@ -1,8 +1,19 @@
-import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+    ViewChild
+} from '@angular/core';
 import {TodoPresenter} from '../../presenter/todo-presenter.service';
 import {TodoViewmodel} from '../../viewmodels/todo-viewmodel';
 import {Observable, Observer, Subscription} from 'rxjs';
-import {debounceTime, filter, map, switchMap, takeLast} from 'rxjs/operators';
+import {debounceTime, filter, map, switchMap, take, takeLast} from 'rxjs/operators';
 import {Todo} from '../../../domain/models/todo';
 import {MessagingService} from '../../../../core/domain/messaging-service';
 import {FormControl} from '@angular/forms';
@@ -14,35 +25,38 @@ import {FormControl} from '@angular/forms';
 })
 export class TodoListComponent implements OnInit, OnDestroy {
 
-    completedTodos$: Observable<Todo[]>;
-    incompleteTodos$: Observable<Todo[]>;
-    currentlyEditedTodo$: Observable<Todo>;
+    @Input() todos;
+    @Output() add = new EventEmitter();
+    @Output() toggle = new EventEmitter();
+    @Output() remove = new EventEmitter();
+    @Output() reorder = new EventEmitter();
+    @Output() changed = new EventEmitter();
+    @ViewChild('addInput') addInput: ElementRef;
     todoSubscription: Subscription;
 
     private _currentlyEditedTodo: TodoViewmodel;
 
-    constructor(private presenter: TodoPresenter) {
+    constructor() {
     }
 
     newTodoInput = new FormControl('');
 
     ngOnInit() {
-        this.completedTodos$ = this.presenter.getCompletedTodos();
-        this.incompleteTodos$ = this.presenter.getIncompleteTodos();
-        this.currentlyEditedTodo$ = this.presenter.getCurrentlyEditedTodo();
-
         this.todoSubscription = new Subscription();
 
         this.todoSubscription.add(
             this.newTodoInput.valueChanges.subscribe(value => {
-                this.addTodo(value);
+
+                this.add.emit(value);
                 this.newTodoInput.reset('', {emitEvent: false});
+                this.addInput.nativeElement.blur();
             }));
 
         this.todoSubscription.add(
+            /*
             this.currentlyEditedTodo$.subscribe((todo: TodoViewmodel) => {
                 this._currentlyEditedTodo = todo;
-            })
+            })*/
         );
     }
 
@@ -57,37 +71,21 @@ export class TodoListComponent implements OnInit, OnDestroy {
             isEditing: false,
             completed: false
         };
-        this.presenter.addTodo(todo);
+        this.add.emit(todo);
     }
 
-    onRemove(todo: TodoViewmodel) {
-        this.presenter.removeTodo(todo);
-    }
 
-    onTodoChanged(todo: TodoViewmodel) {
-        this.presenter.updateTodo(todo);
-    }
-
-    onTodoToggled(todo: TodoViewmodel) {
-        return this.presenter.toggleTodo(todo);
-    }
-
-    addTodo(value: string) {
-        const todo = new TodoViewmodel(value);
-        todo.completed = false;
-        this.presenter.addTodo(todo);
-    }
 
     ngOnDestroy(): void {
         this.todoSubscription.unsubscribe();
     }
 
     onStartEdit(todo: TodoViewmodel) {
-        this.presenter.startTodoEdit(todo);
+        this._currentlyEditedTodo = todo;
     }
 
     onStopEdit() {
-        this.presenter.stopTodoEdit();
+        this._currentlyEditedTodo = null;
     }
 
     isEditing(todo: Todo) {
@@ -96,5 +94,13 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
     trackByFn(index, item) {
         return item.id;
+    }
+
+    get incomplete() {
+        return this.todos.filter(todo => todo.completed);
+    }
+
+    get complete() {
+        return this.todos.filter(todo => !todo.completed);
     }
 }

@@ -9,14 +9,15 @@ import {Injectable} from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export class GetCurrentlyEditedTodoUsecase extends ObservableUseCase<Todo> {
+export class GetLoadingUsecase extends ObservableUseCase<boolean> {
 
     private constructor(private store: Store<any>) {
         super();
     }
 
-    execute(): Observable<Todo> {
+    execute(): Observable<boolean> {
+
         // Forward store data to presentation layer
-        return this.store.select(fromTodo.selectCurrentlyEditedTodo);
+        return this.store.select(fromTodo.selectLoading);
     }
 }

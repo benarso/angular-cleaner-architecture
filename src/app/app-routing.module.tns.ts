@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {NativeScriptRouterModule} from 'nativescript-angular/router';
 import {Routes} from '@angular/router';
 
-import {TodoListComponent} from './todo/presentation/containers/todo-list/todo-list.component';
+import {TodoListComponent} from './todo/presentation/components/todo-list/todo-list.component';
 
 export const routes: Routes = [
     {

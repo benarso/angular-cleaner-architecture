@@ -6,7 +6,7 @@ import {
     LoadTodoSuccess,
     RemoveTodo,
     RemoveTodoSuccess,
-    TodoActionTypes, ToggleTodo, UpdateTodoState, ToggleTodoSuccess, LoadTodos, UpdateTodoSuccess, UpdateTodo, StartTodoEdit
+    TodoActionTypes, ToggleTodo, UpdateTodoState, ToggleTodoSuccess, LoadTodos, UpdateTodoSuccess, UpdateTodo, AddTodo
 } from '../actions/todo.actions';
 import {catchError, concatMap, debounceTime, filter, map, mapTo, switchMap, tap} from 'rxjs/operators';
 import {fromEvent, of} from 'rxjs';
@@ -35,12 +35,12 @@ export class TodoEffects {
 
     @Effect()
     addTodo$ = this.actions$.pipe(
-        ofType<AddTodoSuccess>(TodoActionTypes.AddTodo),
+        ofType<AddTodo>(TodoActionTypes.AddTodo),
         switchMap(action => {
             return this.todoService.addTodo(action.payload).pipe(
+                tap( val => console.warn(val.id)),
                 switchMap((todo) => [
                         new AddTodoSuccess(todo),
-                        new StartTodoEdit(todo),
                     ]
                 ),
                 catchError((e: HttpErrorResponse) => of(new ApiFailure(e)))

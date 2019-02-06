@@ -1,0 +1,15 @@
+<div >
+
+    <div *ngIf="loading$ | async; " fxLayout="row" fxLayoutAlign="center center">
+        <mat-progress-bar mode="query"></mat-progress-bar>
+    </div>
+    <h2>Todo list</h2>
+    <app-todo-list [todos]="todos$ | async"
+                   (changed)="onChanged($event)"
+                   (toggle)="onToggled($event)"
+                   (remove)="onRemove($event)"
+                   (add)="onAdd($event)">
+    </app-todo-list>
+</div>
+
+
