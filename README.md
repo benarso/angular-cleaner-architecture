@@ -1,6 +1,6 @@
 # Angular Cleaner Architecture
 ## What is it for ?
-Note : I used this repo to learn Angular and Ngrx, experiment different architecture concepts, this is probably badly written, not very functionnal and should not be used as a reference. 
+Note : I used this repo to learn Angular/Ngrx and experiment different architecture concepts, this is probably badly written, not very functionnal and should not be used as a reference. If anyone ever submit a pull request, I will gladly look at it.
 
 This is my attempt at implementing Robert C. Martin (Uncle Bob) Clean Architecture guidelines in Angular 7.
  This project is using (among others) : 
